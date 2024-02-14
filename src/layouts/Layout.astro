@@ -1,4 +1,10 @@
 ---
+import "@effective/css-reset/dist/assets/ResetNative.css";
+import "@effective/css-reset/dist/assets/SensibleEnhancements.css";
+import "@effective/css-reset/dist/assets/ResponsiveType.css";
+import logo from "../assets/logo.svg";
+import favicon from "../assets/favicon.svg";
+
 interface Props {
   title: string;
 }
@@ -13,22 +19,86 @@ const { title } = Astro.props;
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="shortcut icon" type="" href={favicon.src} />
     <title>{title}</title>
   </head>
   <body>
-    <header><h1>Förderverein Baumhaus</h1></header>
+    <header>
+      <h1>
+        <a href="/"><img src={logo.src} />Förderverein "Das Baumhaus"</a>
+      </h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Startseite</a>
+          </li>
+          <li>
+            <a href="/impressum">Impressum</a>
+          </li>
+          <li>
+            <a href="/anmeldung">Anmeldung</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <main>
       <slot />
     </main>
-    <footer>Copyright Förderverein Baumhaus e. V.</footer>
+    <footer>
+      Copyright 2024, Förderverein des Evangelischen Kindergartens "Das
+      Baumhaus" Großsachsen e.V.
+    </footer>
   </body>
 </html>
 
 <style>
   body {
-    margin: auto;
+    background: #fff8ec;
+  }
+  header {
+    background-color: #1a6062;
+    color: white;
     padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header img {
+    width: 2rem;
+  }
+  header h1 {
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
+  header h1 a {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  header h1 img {
+    margin-right: 1rem;
+  }
+  nav ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  nav li {
+  }
+  main {
+    padding: 2rem;
+    max-width: 60ch;
+    margin-inline: auto;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  footer {
+    background-color: #343434;
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: white;
   }
 </style>

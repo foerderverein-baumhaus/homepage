@@ -34,3 +34,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`     | Starts local dev server at `localhost:4321`  |
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
+
+## Assets
+
+- https://www.streamlinehq.com/icons/streamline-freehand/users/users-people/multiple-man-woman
+- https://www.streamlinehq.com/illustrations/havana/work/work/about-us-2

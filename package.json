@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.3.7",
     "@astrojs/check": "^0.5.4",
+    "@astrojs/mdx": "^2.1.1",
+    "@effective/css-reset": "^1.0.2",
+    "astro": "^4.3.7",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "svgo": "^3.2.0"
   }
 }

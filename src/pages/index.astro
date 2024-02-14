@@ -1,6 +1,77 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import team from "../assets/team.svg";
 ---
 
-<Layout title="Welcome to Astro.">Förderverein Baumhausxxx</Layout>
+<Layout title="Startseite">
+  <img src={team.src} />
+
+  <h1>Förderverein "Das Baumhaus"</h1>
+
+  <p>
+    Ziel des Fördervereins ist es, die konzeptionelle Ausrichtung des
+    evangelischen Kindergartens mit Ideen und finanziellen Zuwendungen zu
+    unterstützen. Dies betrifft insbesondere Projekte, die im Rahmen der
+    Möglichkeiten des Trägers nicht zu realisieren sind. Sämtliche Einnahmen des
+    Fördervereins aus Mitgliedsbeiträgen, Spenden und Erlösen aus Aktionen
+    fließen zu 100% in den Kindergarten.
+  </p>
+
+  <p>
+    Für eine Mitgliedschaft im Förderverein bitte einfach nur den Aufnahmeantrag
+    ausfüllen. Ebenso freuen wir uns über tatkräftige Unterstützung bei den
+    einzelnen Projekten. Selbstverständlich nehmen wir auch Spenden entgegen.
+    Als gemeinnützig anerkannter Verein stellen wir hierfür gerne eine
+    Spendenquittung aus.
+  </p>
+
+  <h2>Ansprechpartner</h2>
+  <p>
+    1. Vorsitzender: Sebastian Werner<br />
+    2. Vorsitzende: Kathrin Ternes<br />
+    Kassenwart: Marion Sebastian<br />
+    Schriftführer: Dominik Frommherz
+  </p>
+
+  <h2>Bankverbindung</h2>
+  <p>
+    Bank: Volksbank Kurpfalz<br />
+    IBAN: DE29 6729 0100 0061 2265 08<br />
+    BIC: GENODE61HD3
+  </p>
+
+  <h2>Der Kindergarten</h2>
+  <p>
+    Hönigstraße 10<br />
+    69493 Hirschberg-Großsachsen<br />
+    Telefon: 06201-53756<br />
+    E-Mail: kiga.baumhaus.hirschberg-grosssachsen@kbz.ekiba.de
+  </p>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: #1a6062;
+  }
+
+  img {
+    max-width: 60%;
+    margin-inline: auto;
+    margin-block: 2rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+</style>
