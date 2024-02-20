@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import team from "../assets/team.svg";
+import ibanSpende from "../assets/iban-spende.png";
 ---
 
 <Layout title="Startseite">
-  <img src={team.src} />
+  <img src={team.src} class="teamlogo" />
 
   <h1>Förderverein "Das Baumhaus"</h1>
 
@@ -27,51 +28,48 @@ import team from "../assets/team.svg";
 
   <h2>Ansprechpartner</h2>
   <p>
-    1. Vorsitzender: Sebastian Werner<br />
-    2. Vorsitzende: Kathrin Ternes<br />
-    Kassenwart: Marion Sebastian<br />
-    Schriftführer: Dominik Frommherz
+    1. Vorsitzender: <a href="mailto:s.werner@foerderverein-baumhaus.de"
+      >Sebastian Werner</a
+    ><br />
+    2. Vorsitzende: <a href="mailto:k.ternes@foerderverein-baumhaus.de"
+      >Kathrin Ternes</a
+    ><br />
+    Kassenwart: <a href="mailto:m.sebastian@foerderverein-baumhaus.de"
+      >Marion Sebastian</a
+    ><br />
+    Schriftführer: <a href="mailto:d.frommherz@foerderverein-baumhaus.de"
+      >Dominik Frommherz
+    </a>
+
+    <h2>Bankverbindung</h2>
+    <img src={ibanSpende.src} width="120" style="align-self: start" />
+    <p>
+      Bank: Volksbank Kurpfalz<br />
+      IBAN: DE29 6729 0100 0061 2265 08<br />
+      BIC: GENODE61HD3
+    </p>
+
+    <h2>Der Kindergarten</h2>
+    <p>
+      Hönigstraße 10<br />
+      69493 Hirschberg-Großsachsen<br />
+      Telefon: 06201-53756<br />
+      E-Mail: <a
+        href="mailto:kiga.baumhaus.hirschberg-grosssachsen@kbz.ekiba.de"
+        >kiga.baumhaus.hirschberg-grosssachsen@kbz.ekiba.de</a
+      >
+      <br />
+      Web: <a href="https://www.dasbaumhaus-grosssachsen.de">
+        www.dasbaumhaus-grosssachsen.de</a
+      >
+    </p>
   </p>
 
-  <h2>Bankverbindung</h2>
-  <p>
-    Bank: Volksbank Kurpfalz<br />
-    IBAN: DE29 6729 0100 0061 2265 08<br />
-    BIC: GENODE61HD3
-  </p>
-
-  <h2>Der Kindergarten</h2>
-  <p>
-    Hönigstraße 10<br />
-    69493 Hirschberg-Großsachsen<br />
-    Telefon: 06201-53756<br />
-    E-Mail: kiga.baumhaus.hirschberg-grosssachsen@kbz.ekiba.de
-  </p>
+  <style>
+    .teamlogo {
+      max-width: 60%;
+      margin-inline: auto;
+      margin-block: 2rem;
+    }
+  </style>
 </Layout>
-
-<style>
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    color: #1a6062;
-  }
-
-  img {
-    max-width: 60%;
-    margin-inline: auto;
-    margin-block: 2rem;
-  }
-
-  h2 {
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-</style>
