@@ -4,41 +4,14 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Startseite">
   <h1>Aufnahmeantrag</h1>
-  <form>
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
-    </div>
-    <div>
-      <label for="email">E-Mail</label>
-      <input type="email" id="email" name="email" required />
-    </div>
-    <div>
-      <label for="phone">Telefon</label>
-      <input type="tel" id="phone" name="phone" required />
-    </div>
-    <div>
-      <label for="childName">Name des Kindes</label>
-      <input type="text" id="childName" name="childName" required />
-    </div>
-    <div>
-      <label for="message">Nachricht</label>
-      <textarea id="message" name="message" required></textarea>
-    </div>
-    <input type="checkbox" id="sepa" name="sepa" required />
-    <label for="sepa"
-      >Ich ermächtige widerruflich den Förderverein des Evangelischen
-      Kindergartens Das Baumhaus Großsachsen e.V. den von mir zu entrichtenden
-      Beitrag bei Fälligkeit zu Lasten meines nachfolgend aufgeführten Kontos
-      einzuziehen.</label
-    >
-    <div>
-      <label for="iban">IBAN</label>
-      <input type="text" id="iban" name="iban" required />
-    </div>
-
-    <input type="submit" value="Absenden" />
-  </form>
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfzAo7OSNJSknVaxq5WDcZyc_xelBrjFzpvxkZL4i0eHdp9QA/viewform?embedded=true"
+    width="480"
+    height="800"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0">Wird geladen…</iframe
+  >
 </Layout>
 
 <style>
