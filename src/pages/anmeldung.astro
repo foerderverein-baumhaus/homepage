@@ -6,8 +6,8 @@ import Layout from "../layouts/Layout.astro";
   <h1>Aufnahmeantrag</h1>
   <iframe
     src="https://docs.google.com/forms/d/e/1FAIpQLSfzAo7OSNJSknVaxq5WDcZyc_xelBrjFzpvxkZL4i0eHdp9QA/viewform?embedded=true"
-    width="480"
-    height="800"
+    width="580"
+    height="1400"
     frameborder="0"
     marginheight="0"
     marginwidth="0">Wird geladen…</iframe
@@ -15,6 +15,10 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
+  iframe {
+    margin-inline: -2rem;
+  }
+
   form {
     display: grid;
     gap: 1rem;
