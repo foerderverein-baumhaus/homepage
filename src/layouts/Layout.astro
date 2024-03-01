@@ -27,10 +27,7 @@ const { title } = Astro.props
   </head>
   <body>
     <header>
-      <a href="/"><img src={logo.src} /></a>
-      <h1>
-        <a href="/">Förderverein "Das Baumhaus"</a>
-      </h1>
+      <a href="/"><img alt="Förderverein Das Baumhaus" src={logo.src} /></a>
       <nav>
         <ul>
           <li>
@@ -63,40 +60,30 @@ const { title } = Astro.props
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #fff8ec;
+    background: #f7f1eb;
   }
   header {
-    background-color: #1a6062;
+    background-color: #e8d0bb;
     color: white;
-    padding: 1rem;
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    padding-top: 1rem;
   }
   header img {
-    width: 2rem;
-  }
-  header h1 {
-    font-weight: 200;
-    font-size: 1.25rem;
-    line-height: 1;
-    white-space: nowrap;
-
-    @media screen and (min-width: 32rem) {
-      font-size: 1.5rem;
-    }
-  }
-  header h1 a {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-  header h1 img {
-    margin-right: 1rem;
+    max-height: 10rem;
+    width: 100vw;
+    object-fit: contain;
   }
   nav {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #8a633d;
+    padding: 1rem;
   }
   nav ul {
     display: flex;
@@ -110,9 +97,15 @@ const { title } = Astro.props
     margin-inline: auto;
     max-width: 60ch;
   }
+  nav li a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.5em;
+  }
+
   main {
     flex-grow: 1;
-    padding: 2rem;
+    padding-inline: 2rem;
+    padding-bottom: 2rem;
     background: white;
     margin-inline: auto;
     max-width: 60ch;
@@ -124,8 +117,15 @@ const { title } = Astro.props
     font-size: 2rem;
     font-weight: 600;
     line-height: 1;
-    margin-bottom: 0.5rem;
-    color: #1a6062;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: #108226;
+  }
+  main h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
   }
 
   main img {
@@ -136,20 +136,13 @@ const { title } = Astro.props
     margin-inline: 1rem;
   }
 
-  main h2 {
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
   main p,
   main ul {
-    margin-bottom: 1rem;
+    margin-bottom: 1lh;
   }
 
   footer {
-    background-color: #343434;
+    background-color: #8a633d;
     padding: 1rem;
     font-size: 0.875rem;
     color: white;
