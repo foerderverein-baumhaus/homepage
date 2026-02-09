@@ -3,168 +3,645 @@ import "@effective/css-reset/reset.css"
 import "@effective/css-reset/enhancement.css"
 import "@effective/css-reset/typography.css"
 import logo from "../assets/logo.svg"
-import icon from "../assets/icon.svg"
 import favicon from "../assets/favicon.svg"
 
-const { frontmatter } = Astro.props
+interface Props {
+  title?: string
+  wide?: boolean
+  description?: string
+  frontmatter?: {
+    title?: string
+    description?: string
+    wide?: boolean
+  }
+}
+
+const { title, wide = false, description, frontmatter } = Astro.props
+const pageTitle = title || frontmatter?.title || ""
+const pageDescription =
+  description ||
+  frontmatter?.description ||
+  "Förderverein des Evangelischen Kindergartens Das Baumhaus Großsachsen e.V. – Unterstützung mit Ideen und finanziellen Zuwendungen."
+const siteTitle = `${pageTitle} — Förderverein "Das Baumhaus"`
+const isWide = wide || frontmatter?.wide === true
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
+const isActive = (path: string) => currentPath === path
 ---
 
 <!doctype html>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="description"
-      content="Homepage des Fördervereins des Evangelischen Kindergartens 'Das Baumhaus' Großsachsen e.V."
-    />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDescription} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="shortcut icon" type="" href={favicon.src} />
-    <title>{frontmatter.title} - Förderverein "Das Baumhaus"</title>
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=fallback"
+      rel="stylesheet"
+    />
+
+    <title>{siteTitle}</title>
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: 'Förderverein des Evangelischen Kindergartens "Das Baumhaus" Großsachsen e.V.',
+        url: "https://www.foerderverein-baumhaus.de",
+        email: "info@foerderverein-baumhaus.de",
+        description:
+          "Förderverein zur Unterstützung des evangelischen Kindergartens Das Baumhaus in Hirschberg-Großsachsen",
+      })}
+    />
   </head>
   <body>
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
     <header>
-      <a href="/"><img alt="Förderverein Das Baumhaus" src={logo.src} /></a>
-      <nav>
+      <a href="/" class="logo-link">
+        <img
+          alt="Förderverein Das Baumhaus — zur Startseite"
+          src={logo.src}
+          width="417"
+          height="125"
+        />
+      </a>
+      <nav aria-label="Hauptnavigation">
         <ul>
           <li>
-            <a href="/">Startseite</a>
+            <a
+              href="/"
+              aria-current={isActive("/") ? "page" : undefined}
+            >
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m3 10.5 9-7.5 9 7.5"></path>
+                <path d="M5 9.5V20h14V9.5"></path>
+              </svg>
+              <span>Startseite</span>
+            </a>
           </li>
           <li>
-            <a href="/satzung">Satzung</a>
+            <a
+              href="/satzung"
+              aria-current={isActive("/satzung") ? "page" : undefined}
+            >
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+              </svg>
+              <span>Satzung</span>
+            </a>
           </li>
           <li>
-            <a href="/impressum">Impressum</a>
+            <a
+              href="/impressum"
+              aria-current={isActive("/impressum") ? "page" : undefined}
+            >
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
+              <span>Impressum</span>
+            </a>
           </li>
           <li>
-            <a href="/anmeldung">Anmeldung</a>
+            <a
+              href="/anmeldung"
+              aria-current={isActive("/anmeldung") ? "page" : undefined}
+            >
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16 19h6"></path>
+                <path d="M19 16v6"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M3 21v-2a4 4 0 0 1 4-4h4"></path>
+              </svg>
+              <span>Anmeldung</span>
+            </a>
           </li>
         </ul>
       </nav>
     </header>
-    <main>
+    <main id="main" class={isWide ? "main--wide" : "main--narrow"}>
       <slot />
     </main>
     <footer>
-      Copyright 2024-2025, Förderverein des Evangelischen Kindergartens "Das
-      Baumhaus" Großsachsen e.V.
+      <p>
+        &copy; 2024&ndash;{new Date().getFullYear()}, Förderverein des
+        Evangelischen Kindergartens &ldquo;Das Baumhaus&rdquo; Großsachsen e.V.
+      </p>
     </footer>
   </body>
 </html>
 
 <style is:global>
+  /* ===== Design Tokens ===== */
+  :root {
+    --brand: oklch(42% 0.14 150);
+    --brand-hover: oklch(35% 0.12 150);
+
+    --text-strong: oklch(25% 0.03 55);
+    --text-weak: oklch(42% 0.02 55);
+
+    --stroke-strong: oklch(55% 0.02 55);
+    --stroke-weak: oklch(88% 0.01 55);
+
+    --fill: oklch(97.3% 0.01 95);
+    --fill-alt: oklch(95.3% 0.014 100);
+    --bg: oklch(99% 0.004 95);
+
+    --nav-bg: oklch(34% 0.07 145);
+    --header-bg: oklch(92% 0.024 100);
+
+    --font-display: "Vollkorn", Georgia, "Times New Roman", serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --space-xs: 0.5rem;
+    --space-s: 1rem;
+    --space-m: 1.5rem;
+    --space-l: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 5rem;
+
+    --shadow-raised: 0 1px 3px oklch(25% 0.02 55 / 0.1),
+      0 1px 2px oklch(25% 0.02 55 / 0.06);
+    --shadow-overlay: 0 4px 16px oklch(25% 0.02 55 / 0.12),
+      0 2px 4px oklch(25% 0.02 55 / 0.08);
+  }
+
+  /* ===== Base ===== */
   body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #f7f1eb;
-    color: #392b1e;
+    background: var(--fill);
+    color: var(--text-strong);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.925rem + 0.2vw, 1.125rem);
+    line-height: 1.6;
+    font-kerning: normal;
+    font-optical-sizing: auto;
   }
-  header {
-    background-color: #e8d0bb;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    line-height: 1.25;
+    color: var(--text-strong);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* ===== Skip Link ===== */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-s);
+    padding: var(--space-xs) var(--space-s);
+    background: var(--brand);
     color: white;
-    z-index: 10;
+    border-radius: 0 0 0.25rem 0.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    z-index: 100;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* ===== Header ===== */
+  header {
+    background: var(--header-bg);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding-top: 1rem;
+    gap: var(--space-s);
+    padding-block-start: var(--space-m);
     background-image: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.7),
+      oklch(100% 0 0 / 0.45),
       transparent
     );
-    box-shadow:
-      rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
-      rgba(0, 0, 0, 0.14) 0px 3px 4px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+    box-shadow: var(--shadow-raised);
+    position: relative;
+    z-index: 10;
   }
+
+  .logo-link {
+    display: block;
+    text-decoration: none;
+  }
+
   header img {
-    max-height: 10rem;
-    width: 100vw;
+    max-height: 7rem;
+    width: 90vw;
+    max-width: 420px;
     object-fit: contain;
   }
+
+  @media (min-width: 640px) {
+    header img {
+      max-height: 9rem;
+    }
+  }
+
+  /* ===== Navigation ===== */
   nav {
     display: flex;
     width: 100%;
-    flex-direction: column;
-    align-items: center;
-    background-color: #8a633d;
-    padding: 1rem;
+    justify-content: center;
+    background: var(--nav-bg);
+    padding: var(--space-s) var(--space-m);
     background-image: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.1),
+      oklch(100% 0 0 / 0.06),
       transparent
     );
   }
+
   nav ul {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-l);
+    justify-content: center;
     list-style: none;
     padding: 0;
-  }
-  nav li main {
-    padding: 2rem;
-    background: white;
-    margin-inline: auto;
-    max-width: 60ch;
-  }
-  nav li a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.5em;
+    margin: 0;
   }
 
-  main {
-    flex-grow: 1;
-    padding-inline: 2rem;
-    padding-block: 2rem;
-    background: white;
-    margin-inline: auto;
-    max-width: 60ch;
-    box-shadow:
-      rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
-      rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-  }
-  main a {
-    text-decoration: underline;
-  }
-  main a:hover {
-    color: #108226;
-  }
-  main h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: #108226;
-  }
-  main h2 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  nav a {
+    color: oklch(88% 0.005 55);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    padding-block: var(--space-xs);
+    position: relative;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
   }
 
-  main img {
-    margin-block: 1rem;
+  .nav-icon {
+    inline-size: 0.94rem;
+    block-size: 0.94rem;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    opacity: 0.9;
+    flex: 0 0 auto;
   }
 
-  main ul {
-    margin-inline: 1rem;
+  nav a::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+    transform-origin: center;
   }
 
-  main p,
-  main ul {
-    margin-bottom: 1lh;
-  }
-
-  footer {
-    background-color: #8a633d;
-    padding: 1rem;
-    font-size: 0.75rem;
+  nav a[aria-current="page"] {
     color: white;
+  }
+
+  nav a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    nav a:hover {
+      color: white;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* ===== Main (narrow, for MDX pages) ===== */
+  .main--narrow {
+    flex-grow: 1;
+    width: 100%;
+    padding-block: clamp(2.4rem, 5vw, 4.2rem);
+    background:
+      radial-gradient(
+        70rem 24rem at -8% -2%,
+        oklch(95.5% 0.028 138 / 0.6),
+        transparent 62%
+      ),
+      radial-gradient(
+        54rem 28rem at 102% 8%,
+        oklch(95.8% 0.025 92 / 0.58),
+        transparent 66%
+      ),
+      linear-gradient(to bottom, oklch(98.7% 0.007 100), var(--fill) 20%);
+  }
+
+  .main--narrow > * {
+    margin-inline: auto;
+    max-inline-size: 72rem;
+    width: 100%;
+    padding-inline: var(--space-m);
+  }
+
+  .main--narrow > * + * {
+    margin-block-start: var(--space-l);
+  }
+
+  .main--wide {
+    flex-grow: 1;
+  }
+
+  .main--narrow h1 {
+    font-size: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+    color: var(--brand);
+    margin-block-end: var(--space-m);
+    font-weight: 700;
+  }
+
+  .main--narrow h2 {
+    font-size: clamp(1.25rem, 0.875rem + 1vw, 1.5rem);
+    margin-block-start: var(--space-xl);
+    margin-block-end: var(--space-xs);
+    font-weight: 700;
+  }
+
+  .main--narrow h3 {
+    font-size: clamp(1.0625rem, 0.8rem + 0.5vw, 1.25rem);
+    margin-block-start: var(--space-l);
+    margin-block-end: var(--space-xs);
+    font-weight: 700;
+  }
+
+  .main--narrow a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .main--narrow a:hover {
+      color: var(--brand-hover);
+    }
+  }
+
+  .main--narrow img {
+    margin-block: var(--space-s);
+  }
+
+  .main--narrow ul,
+  .main--narrow ol {
+    margin-inline-start: var(--space-m);
+  }
+
+  .main--narrow p,
+  .main--narrow ul,
+  .main--narrow ol {
+    margin-block-end: 1lh;
+  }
+
+  .main--narrow li + li {
+    margin-block-start: 0.25lh;
+  }
+
+  /* ===== Editorial Subpages ===== */
+  .legal-page {
+    display: grid;
+    gap: clamp(1.6rem, 3.3vw, 2.7rem);
+  }
+
+  .legal-hero {
+    padding: clamp(1.3rem, 2.5vw, 2rem);
+    border-radius: 1rem;
+    border: 1px solid oklch(79% 0.015 88 / 0.72);
+    background:
+      linear-gradient(180deg, oklch(100% 0 0 / 0.54), oklch(98.8% 0.006 100 / 0.72)),
+      linear-gradient(118deg, oklch(92% 0.05 136 / 0.21), transparent 52%);
+    box-shadow:
+      0 18px 36px oklch(25% 0.02 55 / 0.08),
+      0 1px 0 oklch(100% 0 0 / 0.52) inset;
+  }
+
+  .legal-kicker {
+    margin: 0;
+    font-size: 0.79rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: oklch(35% 0.045 132);
+  }
+
+  .legal-hero h1 {
+    margin-block: 0.5rem 0.75rem;
+    font-size: clamp(1.9rem, 1.35rem + 1.8vw, 2.85rem);
+    color: var(--brand);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  .legal-lead {
+    margin: 0;
+    color: var(--text-weak);
+    max-inline-size: 67ch;
+    font-size: clamp(1.03rem, 0.96rem + 0.25vw, 1.17rem);
+    line-height: 1.68;
+  }
+
+  .legal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-block-start: 1rem;
+    margin-inline-start: 0;
+    margin-block-end: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.46rem;
+    padding: 0.5rem 0.82rem;
+    border-radius: 999px;
+    border: 1px solid oklch(76% 0.016 86 / 0.82);
+    background: oklch(100% 0 0 / 0.68);
+    color: oklch(33% 0.034 120);
+    font-size: 0.84rem;
+    line-height: 1.28;
+    margin-block-end: 0;
+  }
+
+  .legal-meta-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.1;
+    transform: translateY(0.01em);
+  }
+
+  .legal-meta li + li {
+    margin-block-start: 0;
+  }
+
+  .legal-meta svg {
+    inline-size: 0.92rem;
+    block-size: 0.92rem;
+    display: block;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    flex: 0 0 auto;
+    margin-block-start: 0;
+  }
+
+  .legal-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.2rem, 2vw, 1.8rem);
+  }
+
+  .legal-toc {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    align-self: start;
+    overflow: visible;
+  }
+
+  .legal-toc h2 {
+    font-size: 1rem;
+    margin: 0 0 0.45rem;
+    color: var(--text-strong);
+    opacity: 0.88;
+  }
+
+  .legal-toc ol,
+  .legal-toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .legal-toc li {
+    margin: 0;
+  }
+
+  .legal-toc li + li {
+    margin-block-start: 0;
+  }
+
+  .legal-toc a {
+    display: block;
+    padding: 0.34rem 0.3rem 0.34rem 0.7rem;
+    border-left: 2px solid oklch(80% 0.012 90);
+    color: oklch(35% 0.02 75);
+    text-decoration: none;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .legal-toc a:hover {
+    color: var(--brand);
+    border-left-color: oklch(52% 0.08 142);
+  }
+
+  .legal-prose {
+    border-radius: 1rem;
+    border: 1px solid oklch(82% 0.014 85 / 0.82);
+    background: oklch(100% 0 0 / 0.74);
+    padding: clamp(1.2rem, 2vw, 2rem);
+    box-shadow:
+      0 12px 30px oklch(25% 0.02 55 / 0.06),
+      0 1px 0 oklch(100% 0 0 / 0.46) inset;
+  }
+
+  .legal-prose h2 {
+    margin-block-start: clamp(2rem, 4vw, 2.6rem);
+    margin-block-end: 0.75rem;
+    color: oklch(31% 0.052 130);
+    font-size: clamp(1.23rem, 1.08rem + 0.5vw, 1.45rem);
+    scroll-margin-top: 6rem;
+  }
+
+  .legal-prose h2:first-of-type {
+    margin-block-start: 0;
+  }
+
+  .legal-prose p {
+    margin-block-end: 0.9rem;
+  }
+
+  .legal-prose ul {
+    margin-block-end: 0.9rem;
+  }
+
+  .legal-prose li + li {
+    margin-block-start: 0.3rem;
+  }
+
+  @media (min-width: 960px) {
+    .legal-shell {
+      grid-template-columns: minmax(0, 15.5rem) minmax(0, 1fr);
+      align-items: start;
+      gap: clamp(1.2rem, 2.2vw, 2rem);
+    }
+
+    .legal-toc {
+      position: sticky;
+      top: 1.1rem;
+      max-block-size: calc(100vh - 2.2rem);
+      overflow: auto;
+    }
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: var(--nav-bg);
+    padding: var(--space-m) var(--space-s);
+    font-size: 0.8125rem;
+    color: oklch(82% 0.005 55);
     text-align: center;
+  }
+
+  footer p {
+    margin: 0;
   }
 </style>
