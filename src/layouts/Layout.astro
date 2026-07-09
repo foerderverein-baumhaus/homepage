@@ -144,6 +144,10 @@ const isActive = (path: string) => currentPath === path
         &copy; 2024&ndash;{new Date().getFullYear()}, Förderverein des
         Evangelischen Kindergartens &ldquo;Das Baumhaus&rdquo; Großsachsen e.V.
       </p>
+      <ul class="footer-links" role="list">
+        <li><a href="/impressum">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+      </ul>
     </footer>
   </body>
 </html>
@@ -692,5 +696,20 @@ const isActive = (path: string) => currentPath === path
 
   footer p {
     margin: 0;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--space-m);
+    padding: 0;
+    margin: var(--space-xs) 0 0;
+  }
+
+  .footer-links a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 </style>
