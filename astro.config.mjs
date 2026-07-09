@@ -3,5 +3,6 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://www.foerderverein-baumhaus.de",
   integrations: [mdx()],
 });

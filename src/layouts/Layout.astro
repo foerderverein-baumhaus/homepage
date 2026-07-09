@@ -27,6 +27,10 @@ const isWide = wide || frontmatter?.wide === true
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
 const isActive = (path: string) => currentPath === path
+
+const site = Astro.site ?? new URL("https://www.foerderverein-baumhaus.de")
+const canonicalUrl = new URL(Astro.url.pathname, site)
+const ogImageUrl = new URL("/og-image.png", site)
 ---
 
 <!doctype html>
@@ -38,10 +42,16 @@ const isActive = (path: string) => currentPath === path
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={favicon.src} />
 
-    <meta property="og:title" content={pageTitle} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:site_name" content='Förderverein "Das Baumhaus"' />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <link
       rel="preload"
