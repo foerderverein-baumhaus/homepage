@@ -229,7 +229,17 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             <dt>Bank</dt>
             <dd>Volksbank Kurpfalz</dd>
             <dt>IBAN</dt>
-            <dd>DE29 6729 0100 0061 2265 08</dd>
+            <dd class="donate-iban">
+              <span>DE29 6729 0100 0061 2265 08</span>
+              <button
+                type="button"
+                class="iban-copy"
+                data-iban="DE29672901000061226508"
+                hidden
+              >
+                Kopieren
+              </button>
+            </dd>
             <dt>BIC</dt>
             <dd>GENODE61HD3</dd>
           </dl>
@@ -315,6 +325,33 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     </div>
   </section>
 </Layout>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>(".iban-copy")
+  if (btn && "clipboard" in navigator) {
+    btn.hidden = false
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.iban ?? "")
+        btn.textContent = "Kopiert ✓"
+      } catch {
+        // Clipboard nicht verfügbar: IBAN zum manuellen Kopieren markieren
+        const span = btn.parentElement?.querySelector("span")
+        if (span) {
+          const range = document.createRange()
+          range.selectNodeContents(span)
+          const selection = window.getSelection()
+          selection?.removeAllRanges()
+          selection?.addRange(range)
+          btn.textContent = "Markiert"
+        }
+      }
+      setTimeout(() => {
+        btn.textContent = "Kopieren"
+      }, 2000)
+    })
+  }
+</script>
 
 <style is:global>
   /* ===== Homepage Layout ===== */
@@ -711,6 +748,33 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
 
   .section--donate .donate-details dd {
     color: white;
+  }
+
+  .donate-iban {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem 0.7rem;
+  }
+
+  .iban-copy {
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid oklch(100% 0 0 / 0.45);
+    background: oklch(100% 0 0 / 0.12);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .iban-copy:hover {
+      background: oklch(100% 0 0 / 0.24);
+    }
   }
 
   .section--donate .donate-card {
