@@ -16,3 +16,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# impeccable tool state (critique snapshots, live mode)
+.impeccable/
+
+# local Claude settings
+.claude/settings.local.json
