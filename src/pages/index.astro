@@ -555,7 +555,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
 
   .section-head {
     margin-block-end: 1.4rem;
-    animation: reveal-up 0.6s ease-out both;
   }
 
   .section h2 {
@@ -575,7 +574,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
-    animation: reveal-up 0.65s ease-out 0.08s both;
   }
 
   .about-text p + p {
@@ -644,7 +642,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     gap: 0.38rem;
     padding: 0.78rem 0;
     border-block-end: 1px solid oklch(80% 0.02 70 / 0.75);
-    animation: reveal-up 0.6s ease-out both;
   }
 
   .board-role {
@@ -703,7 +700,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     align-items: start;
     text-align: start;
     gap: 0.72rem;
-    animation: reveal-up 0.65s ease-out both;
   }
 
   .donate-card h3 {
@@ -770,7 +766,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     font-style: normal;
     padding-block-start: 0.72rem;
     border-block-start: 1px solid oklch(80% 0.02 70 / 0.75);
-    animation: reveal-up 0.65s ease-out both;
   }
 
   .kiga-card p {
@@ -848,15 +843,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-layout,
-    .hero-panel,
-    .hero-media,
-    .section-head,
-    .about-grid,
-    .project-card,
-    .board-card,
-    .donate-card,
-    .kiga-card {
+    .hero-layout {
       animation: none;
     }
   }
