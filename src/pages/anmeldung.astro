@@ -1,0 +1,217 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const formUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfzAo7OSNJSknVaxq5WDcZyc_xelBrjFzpvxkZL4i0eHdp9QA/viewform"
+---
+
+<Layout
+  title="Mitglied werden"
+  description="Mitglied im Förderverein Das Baumhaus werden: In zwei Minuten ausgefüllt, einmal im Jahr abgebucht, jederzeit schriftlich kündbar."
+>
+  <div class="join-page">
+    <div class="join-intro">
+      <h1>Mitglied werden</h1>
+      <p class="join-lead">
+        Schön, dass Sie dabei sein möchten! Mit Ihrer Mitgliedschaft geben Sie
+        den Kindern im Baumhaus mehr Möglichkeiten&nbsp;&ndash; und uns die
+        Planungssicherheit, auch das nächste Projekt anzupacken.
+      </p>
+    </div>
+
+    <section class="join-steps" aria-labelledby="ablauf">
+      <h2 id="ablauf">So läuft es ab</h2>
+      <ol>
+        <li>
+          <div>
+            <strong>Antrag ausfüllen.</strong>
+            Dauert etwa zwei Minuten: Name, Anschrift und Bankverbindung für
+            den Jahresbeitrag (SEPA-Lastschrift).
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Wir melden uns.</strong>
+            Der Vorstand bestätigt Ihre Aufnahme persönlich per E-Mail.
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Sie sind dabei.</strong>
+            Der Beitrag wird einmal im Jahr abgebucht, und Sie erhalten die
+            Einladung zur Mitgliederversammlung. Mehr Pflichten gibt es nicht.
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="join-facts" aria-label="Gut zu wissen">
+      <h2>Gut zu wissen</h2>
+      <ul>
+        <li>
+          <strong>Jahresbeitrag:</strong>
+          {/* TODO: Aktuelle Beitragshöhe eintragen, sobald vom Vorstand bestätigt */}
+          Die Höhe legt unsere Mitgliederversammlung fest. Die aktuelle Höhe
+          nennen wir Ihnen gerne&nbsp;&ndash; eine kurze Mail an
+          <a href="mailto:info@foerderverein-baumhaus.de"
+            >info@foerderverein-baumhaus.de</a
+          > genügt.
+        </li>
+        <li>
+          <strong>Kündigung:</strong> Jederzeit schriftlich möglich, mit drei
+          Monaten Frist zum Ende des Geschäftsjahres (<a href="/satzung"
+            >§4 der Satzung</a
+          >).
+        </li>
+        <li>
+          <strong>Ihre Daten:</strong> Wir verwenden sie ausschließlich für die
+          Mitgliederverwaltung&nbsp;&ndash; Details in der
+          <a href="/datenschutz">Datenschutzerklärung</a>.
+        </li>
+      </ul>
+    </section>
+
+    <section class="join-form" aria-labelledby="antrag">
+      <h2 id="antrag">Der Aufnahmeantrag</h2>
+      <p>
+        Das Antragsformular kommt von Google. Erst wenn Sie es laden, werden
+        Daten an Google übertragen&nbsp;&ndash; Sie können es auch
+        <a href={formUrl} target="_blank" rel="noopener"
+          >in einem neuen Tab öffnen</a
+        >.
+      </p>
+      <div class="form-slot" data-form-url={`${formUrl}?embedded=true`}>
+        <button type="button" class="btn-load-form">
+          Formular hier anzeigen
+        </button>
+      </div>
+      <noscript>
+        <p>
+          <a href={formUrl} target="_blank" rel="noopener"
+            >Zum Aufnahmeantrag (öffnet bei Google Forms)</a
+          >
+        </p>
+      </noscript>
+      <p class="join-alt">
+        Lieber klassisch? Schreiben Sie uns an
+        <a href="mailto:info@foerderverein-baumhaus.de"
+          >info@foerderverein-baumhaus.de</a
+        >&nbsp;&ndash; wir schicken Ihnen den Antrag gerne per E-Mail oder auf
+        Papier.
+      </p>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  const slot = document.querySelector<HTMLElement>(".form-slot")
+  slot?.querySelector("button")?.addEventListener("click", () => {
+    const iframe = document.createElement("iframe")
+    iframe.src = slot.dataset.formUrl ?? ""
+    iframe.title = "Aufnahmeantrag ausfüllen"
+    iframe.setAttribute("loading", "lazy")
+    slot.replaceChildren(iframe)
+    iframe.focus()
+  })
+</script>
+
+<style>
+  .join-lead {
+    font-size: clamp(1.075rem, 0.92rem + 0.4vw, 1.22rem);
+    color: var(--text-weak);
+    max-inline-size: 58ch;
+    line-height: 1.68;
+  }
+
+  .join-steps ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: steps;
+    display: grid;
+    gap: 0.9rem;
+    max-inline-size: 62ch;
+  }
+
+  .join-steps li {
+    counter-increment: steps;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    align-items: baseline;
+    margin: 0;
+  }
+
+  .join-steps li::before {
+    content: counter(steps);
+    font-family: var(--font-display);
+    font-variant-numeric: lining-nums;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: white;
+    background: var(--brand);
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0.35rem);
+  }
+
+  .join-steps strong {
+    display: block;
+    margin-block-end: 0.15rem;
+  }
+
+  .join-facts ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    max-inline-size: 62ch;
+  }
+
+  .join-facts li {
+    padding-block: 0.7rem;
+    border-block-start: 1px solid oklch(80% 0.02 70 / 0.75);
+    margin: 0;
+  }
+
+  .join-form iframe,
+  .form-slot :global(iframe) {
+    width: 100%;
+    max-width: 580px;
+    height: 1400px;
+    border: none;
+    background: white;
+    border-radius: 0.6rem;
+  }
+
+  .btn-load-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    min-height: 48px;
+    border-radius: 0.6rem;
+    border: 1px solid transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: inherit;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(
+      160deg,
+      var(--brand) 0%,
+      oklch(35% 0.14 144) 100%
+    );
+  }
+
+  .join-alt {
+    color: var(--text-weak);
+    max-inline-size: 58ch;
+  }
+</style>
