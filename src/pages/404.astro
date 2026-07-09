@@ -1,0 +1,81 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout
+  title="Seite nicht gefunden"
+  description="Diese Seite gibt es nicht — aber der Weg zurück ist kurz."
+>
+  <div class="not-found">
+    <h1>Diese Seite gibt es nicht</h1>
+    <p>
+      Vielleicht ist der Link veraltet oder es hat sich ein Tippfehler
+      eingeschlichen. Das Wichtigste ist zum Glück schnell wiedergefunden:
+    </p>
+    <ul class="not-found-links" role="list">
+      <li><a href="/" class="btn btn--primary">Zur Startseite</a></li>
+      <li><a href="/anmeldung" class="btn btn--secondary">Mitglied werden</a></li>
+      <li><a href="/#spenden" class="btn btn--secondary">Spenden</a></li>
+    </ul>
+    <p class="not-found-help">
+      Sie haben etwas gesucht und nicht gefunden? Schreiben Sie uns an
+      <a href="mailto:info@foerderverein-baumhaus.de"
+        >info@foerderverein-baumhaus.de</a
+      > — wir helfen gerne weiter.
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .not-found {
+    text-align: start;
+    padding-block: var(--space-l);
+  }
+
+  .not-found-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0 0 var(--space-l);
+  }
+
+  .not-found-links li {
+    margin: 0;
+  }
+
+  .not-found-help {
+    color: var(--text-weak);
+    max-inline-size: 55ch;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    min-height: 48px;
+    border: 1px solid transparent;
+  }
+
+  .btn--primary {
+    color: white;
+    background: linear-gradient(
+      160deg,
+      var(--brand) 0%,
+      oklch(35% 0.14 144) 100%
+    );
+  }
+
+  .btn--secondary {
+    background: oklch(100% 0 0 / 0.75);
+    color: var(--text-strong);
+    border-color: oklch(70% 0.02 65 / 0.85);
+  }
+</style>
