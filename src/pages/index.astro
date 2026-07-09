@@ -266,6 +266,11 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             Banküberweisung
           </p>
           <h3>Direkt per IBAN</h3>
+          <p class="donate-hint">
+            Scannen Sie den Code mit Ihrer Banking-App&nbsp;&ndash; die
+            Überweisung füllt sich von selbst aus. Oder nutzen Sie einfach die
+            Bankverbindung darunter.
+          </p>
           <Image
             src={ibanSpende}
             alt="QR-Code für Banküberweisung an den Förderverein"
@@ -295,6 +300,10 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             Online-Spende
           </p>
           <h3>PayPal</h3>
+          <p class="donate-hint">
+            Scannen Sie den Code mit der Handykamera&nbsp;&ndash; oder klicken
+            Sie direkt auf den Button.
+          </p>
           <Image
             src={paypalSpende}
             alt="QR-Code für PayPal-Spende an den Förderverein"
@@ -312,8 +321,12 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
         </div>
       </div>
       <p class="donate-note">
-        Als gemeinnützig anerkannter Verein stellen wir gerne eine
-        Spendenquittung aus. Spenden sind steuerlich absetzbar.
+        Spenden an uns sind steuerlich absetzbar. Für eine Spendenquittung
+        schreiben Sie einfach Ihre Adresse in den Verwendungszweck oder eine
+        kurze Mail an
+        <a href="mailto:info@foerderverein-baumhaus.de"
+          >info@foerderverein-baumhaus.de</a
+        >.
       </p>
     </div>
   </section>
@@ -752,7 +765,8 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
 
   .board-name a,
   .board-contact a,
-  .kiga-contact a {
+  .kiga-contact a,
+  .donate-note a {
     color: var(--brand);
     text-decoration: underline;
     text-underline-offset: 0.18em;
@@ -810,6 +824,13 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     font-weight: 700;
     color: var(--text-strong);
     margin: 0;
+  }
+
+  .donate-hint {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--text-weak);
+    max-inline-size: 38ch;
   }
 
   .donate-qr {
@@ -872,7 +893,8 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   @media (hover: hover) and (pointer: fine) {
     .board-name a:hover,
     .board-contact a:hover,
-    .kiga-contact a:hover {
+    .kiga-contact a:hover,
+    .donate-note a:hover {
       color: var(--brand-hover);
     }
   }
