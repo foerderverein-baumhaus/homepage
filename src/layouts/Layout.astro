@@ -426,10 +426,10 @@ const ogImageUrl = new URL("/og-image.png", site)
       ),
       radial-gradient(
         54rem 28rem at 102% 8%,
-        oklch(95.8% 0.025 92 / 0.58),
+        oklch(95.8% 0.025 130 / 0.58),
         transparent 66%
       ),
-      linear-gradient(to bottom, oklch(98.7% 0.007 100), var(--fill) 20%);
+      linear-gradient(to bottom, oklch(98.7% 0.008 145), var(--fill) 20%);
   }
 
   .main--narrow > * {
@@ -510,22 +510,13 @@ const ogImageUrl = new URL("/og-image.png", site)
   .legal-hero {
     padding: clamp(1.3rem, 2.5vw, 2rem);
     border-radius: 1rem;
-    border: 1px solid oklch(79% 0.015 88 / 0.72);
+    border: 1px solid oklch(79% 0.02 145 / 0.72);
     background:
       linear-gradient(180deg, oklch(100% 0 0 / 0.54), oklch(98.8% 0.006 100 / 0.72)),
       linear-gradient(118deg, oklch(92% 0.05 136 / 0.21), transparent 52%);
-    box-shadow:
-      0 18px 36px oklch(25% 0.02 55 / 0.08),
-      0 1px 0 oklch(100% 0 0 / 0.52) inset;
+    box-shadow: var(--shadow-raised);
   }
 
-  .legal-kicker {
-    margin: 0;
-    font-size: 0.79rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: oklch(35% 0.045 132);
-  }
 
   .legal-hero h1 {
     margin-block: 0.5rem 0.75rem;
@@ -560,7 +551,7 @@ const ogImageUrl = new URL("/og-image.png", site)
     gap: 0.46rem;
     padding: 0.5rem 0.82rem;
     border-radius: 999px;
-    border: 1px solid oklch(76% 0.016 86 / 0.82);
+    border: 1px solid oklch(76% 0.02 145 / 0.82);
     background: oklch(100% 0 0 / 0.68);
     color: oklch(33% 0.034 120);
     font-size: 0.9rem;
@@ -633,7 +624,7 @@ const ogImageUrl = new URL("/og-image.png", site)
   .legal-toc a {
     display: block;
     padding: 0.34rem 0.3rem 0.34rem 0.7rem;
-    border-left: 2px solid oklch(80% 0.012 90);
+    border-left: 2px solid oklch(80% 0.015 145);
     color: oklch(35% 0.02 75);
     text-decoration: none;
     font-size: 0.9375rem;
@@ -651,12 +642,10 @@ const ogImageUrl = new URL("/og-image.png", site)
 
   .legal-prose {
     border-radius: 1rem;
-    border: 1px solid oklch(82% 0.014 85 / 0.82);
+    border: 1px solid oklch(82% 0.018 145 / 0.82);
     background: oklch(100% 0 0 / 0.74);
     padding: clamp(1.2rem, 2vw, 2rem);
-    box-shadow:
-      0 12px 30px oklch(25% 0.02 55 / 0.06),
-      0 1px 0 oklch(100% 0 0 / 0.46) inset;
+    box-shadow: var(--shadow-raised);
   }
 
   .legal-prose h2 {
