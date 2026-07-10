@@ -154,6 +154,39 @@ const ogImageUrl = new URL("/og-image.png", site)
     <main id="main" class={isWide ? "main--wide" : "main--narrow"}>
       <slot />
     </main>
+    <script>
+      // Scroll-Reveals: Standard ist sichtbar. Nur mit JS, ohne
+      // reduced-motion und nur unterhalb des Viewports wird der
+      // Ausgangszustand gesetzt — kein Blank-Risiko ohne JS/Headless.
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+      const revealEls = document.querySelectorAll<HTMLElement>("[data-reveal]")
+      if (!reduceMotion && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("reveal-in")
+                io.unobserve(entry.target)
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px" }
+        )
+        for (const el of revealEls) {
+          if (el.getBoundingClientRect().top > window.innerHeight) {
+            el.classList.add("reveal-pre")
+            io.observe(el)
+          }
+        }
+        // Sicherheitsnetz: Umgebungen mit inertem IntersectionObserver
+        // (manche Webviews) decken nach 5s alles Verbliebene auf
+        window.setTimeout(() => {
+          for (const el of revealEls) el.classList.add("reveal-in")
+        }, 5000)
+      }
+    </script>
     <footer>
       <img
         src={icon.src}
@@ -766,6 +799,51 @@ const ogImageUrl = new URL("/og-image.png", site)
     text-underline-offset: 0.18em;
     display: inline-block;
     padding-block: 0.75rem;
+  }
+
+  /* ===== Scroll-Reveals (Zustand setzt ausschließlich JS) ===== */
+  [data-reveal].reveal-pre {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  [data-reveal].reveal-pre.reveal-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* Illustrationen setzen sich hin: etwas mehr Weg, der
+     Bodenschatten erscheint erst nach der Landung */
+  .illu[data-reveal].reveal-pre,
+  .join-facts-media[data-reveal].reveal-pre {
+    transform: translateY(22px);
+  }
+
+  .illu[data-reveal].reveal-pre.reveal-in,
+  .join-facts-media[data-reveal].reveal-pre.reveal-in {
+    transition-duration: 0.75s;
+  }
+
+  .illu[data-reveal].reveal-pre::before,
+  .join-facts-media[data-reveal].reveal-pre::before {
+    opacity: 0;
+  }
+
+  .illu[data-reveal].reveal-pre.reveal-in::before,
+  .join-facts-media[data-reveal].reveal-pre.reveal-in::before {
+    opacity: 1;
+    transition: opacity 0.45s ease-out 0.35s;
+  }
+
+  @media print {
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   .footer-copy {

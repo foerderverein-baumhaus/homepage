@@ -21,20 +21,20 @@ import muenzen from "../assets/muenzen.svg"
     <section class="join-steps" aria-labelledby="ablauf">
       <h2 id="ablauf">So läuft es ab</h2>
       <ol>
-        <li>
+        <li data-reveal style="--i: 0">
           <div>
             <strong>Antrag ausfüllen.</strong>
             Dauert etwa zwei Minuten: Name, Anschrift und Bankverbindung für
             den Jahresbeitrag von 15&nbsp;&euro; (SEPA-Lastschrift).
           </div>
         </li>
-        <li>
+        <li data-reveal style="--i: 1">
           <div>
             <strong>Wir melden uns.</strong>
             Der Vorstand bestätigt Ihre Aufnahme persönlich per E-Mail.
           </div>
         </li>
-        <li>
+        <li data-reveal style="--i: 2">
           <div>
             <strong>Sie sind dabei.</strong>
             Der Beitrag wird einmal im Jahr abgebucht, und Sie erhalten die
@@ -66,7 +66,7 @@ import muenzen from "../assets/muenzen.svg"
           <a href="/datenschutz">Datenschutzerklärung</a>.
         </li>
       </ul>
-      <figure class="join-facts-media">
+      <figure class="join-facts-media" data-reveal>
         <Image
           src={muenzen}
           alt="Eine Person stapelt sorgfältig Münzen"
