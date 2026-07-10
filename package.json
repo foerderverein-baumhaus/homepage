@@ -19,6 +19,7 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@types/node": "^26.1.1",
     "@types/nodemailer": "^8.0.1",
     "prettier": "^3.6.2",
     "sharp": "^0.34.3",

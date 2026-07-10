@@ -16,7 +16,7 @@ dependencies:
     version: 3.2.0
   astro:
     specifier: ^5.13.3
-    version: 5.13.3(typescript@5.9.2)
+    version: 5.13.3(@types/node@26.1.1)(typescript@5.9.2)
   nodemailer:
     specifier: ^9.0.3
     version: 9.0.3
@@ -25,6 +25,9 @@ dependencies:
     version: 5.9.2
 
 devDependencies:
+  '@types/node':
+    specifier: ^26.1.1
+    version: 26.1.1
   '@types/nodemailer':
     specifier: ^8.0.1
     version: 8.0.1
@@ -136,7 +139,7 @@ packages:
       '@astrojs/markdown-remark': 6.3.6
       '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
       acorn: 8.15.0
-      astro: 5.13.3(typescript@5.9.2)
+      astro: 5.13.3(@types/node@26.1.1)(typescript@5.9.2)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -1206,7 +1209,7 @@ packages:
   /@types/fontkit@2.0.8:
     resolution: {integrity: sha512-wN+8bYxIpJf+5oZdrdtaX04qUuWHcKxcDEgRS9Qm9ZClSHjzEn13SxUC+5eRM+4yXIeTYk8mTzLAWGF64847ew==}
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 26.1.1
     dev: false
 
   /@types/hast@3.0.4:
@@ -1235,15 +1238,15 @@ packages:
       '@types/unist': 3.0.2
     dev: false
 
-  /@types/node@24.3.0:
-    resolution: {integrity: sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==}
+  /@types/node@26.1.1:
+    resolution: {integrity: sha512-nxAkRSVkN1Y0JC1W8ky/fTfkGsMmcrRsbx+3XoZE+rMOX71kLYTV7fLXpqud1GpbpP5TuffXFqfX7fH2GgZREw==}
     dependencies:
-      undici-types: 7.10.0
+      undici-types: 8.3.0
 
   /@types/nodemailer@8.0.1:
     resolution: {integrity: sha512-PxpaInm8V1JQDd4j0ds5HfvWQk8JupS1C0Picb96QJsrrRDjBH+DlK7L4ZdNSqNULhiZRQHc40nLVShaGxXAMw==}
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 26.1.1
     dev: true
 
   /@types/unist@2.0.10:
@@ -1403,7 +1406,7 @@ packages:
     hasBin: true
     dev: false
 
-  /astro@5.13.3(typescript@5.9.2):
+  /astro@5.13.3(@types/node@26.1.1)(typescript@5.9.2):
     resolution: {integrity: sha512-V0mUOUK70UZ7xqXp5Noqse/SREU0P756KgFufBEluq5LkmBejzC2GENMUA2Na+PFwUjemElJtRlpKyrnKpFhSQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
@@ -1462,7 +1465,7 @@ packages:
       unist-util-visit: 5.0.0
       unstorage: 1.17.0
       vfile: 6.0.3
-      vite: 6.3.5
+      vite: 6.3.5(@types/node@26.1.1)
       vitefu: 1.1.1(vite@6.3.5)
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
@@ -3767,8 +3770,8 @@ packages:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
     dev: false
 
-  /undici-types@7.10.0:
-    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
+  /undici-types@8.3.0:
+    resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
   /unicode-properties@1.4.1:
     resolution: {integrity: sha512-CLjCCLQ6UuMxWnbIylkisbRj31qxHPAurvena/0iwSVbQ2G1VY5/HjV0IRabOEbDHlzZlRdCrD4NhB0JtU40Pg==}
@@ -3975,7 +3978,7 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /vite@6.3.5:
+  /vite@6.3.5(@types/node@26.1.1):
     resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
@@ -4015,6 +4018,7 @@ packages:
       yaml:
         optional: true
     dependencies:
+      '@types/node': 26.1.1
       esbuild: 0.25.9
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
@@ -4033,7 +4037,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 6.3.5
+      vite: 6.3.5(@types/node@26.1.1)
     dev: false
 
   /volar-service-css@0.0.62(@volar/language-service@2.4.23):
