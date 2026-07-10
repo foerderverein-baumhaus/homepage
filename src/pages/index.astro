@@ -324,6 +324,25 @@ import qrPaypal from "../assets/qr-paypal.svg"
           </li>
         </ul>
       </div>
+      <div class="donate-business">
+        <h3>Gutes tun&nbsp;&ndash; und genannt werden</h3>
+        <p>
+          Sie führen ein Unternehmen? Bei Unternehmensspenden sagen wir gern
+          öffentlich Danke&nbsp;&ndash; mit Ihrem Namen an dieser Stelle, wenn
+          Sie das möchten. Die ersten Plätze sind noch frei. Schreiben Sie uns
+          einfach an
+          <a
+            href="mailto:info@foerderverein-baumhaus.de?subject=Unternehmensspende"
+            >info@foerderverein-baumhaus.de</a
+          >.
+        </p>
+        {/* Künftige Unternehmens-Spender hier als Liste ergänzen */}
+        <p class="donate-business-note">
+          Gut zu wissen: Die Namensnennung ändert nichts an der Absetzbarkeit
+          Ihrer Spende. Sie möchten mehr Sichtbarkeit&nbsp;&ndash; Logo oder
+          Verlinkung? Dann sprechen Sie uns auf Sponsoring an.
+        </p>
+      </div>
       <p class="donate-note">
         Spendenquittung? Selbstverständlich. Schreiben Sie einfach Ihre
         Adresse in den Verwendungszweck oder eine kurze Mail an
@@ -1044,6 +1063,41 @@ import qrPaypal from "../assets/qr-paypal.svg"
 
   .donate-more strong {
     color: white;
+  }
+
+  .donate-business {
+    max-inline-size: 62ch;
+    margin-block-end: var(--space-l);
+  }
+
+  .section--donate .donate-business h3 {
+    font-family: var(--font-display);
+    font-size: 1.28rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.4rem;
+  }
+
+  .donate-business p {
+    color: oklch(88% 0.015 148);
+    margin-block-end: 0.6rem;
+  }
+
+  .donate-business a {
+    color: oklch(90% 0.05 145);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .donate-business-note {
+    font-size: 1rem;
+    color: oklch(80% 0.02 148);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .donate-business a:hover {
+      color: white;
+    }
   }
 
   .donate-note {
