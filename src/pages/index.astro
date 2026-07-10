@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro"
 import { Image } from "astro:assets"
 import team from "../assets/team.svg"
+import familie from "../assets/familie.svg"
+import uebermut from "../assets/uebermut.svg"
 import ibanSpende from "../assets/iban-spende.png"
 import paypalSpende from "../assets/paypal-spende.jpeg"
 ---
@@ -115,6 +117,15 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             </li>
           </ul>
         </div>
+        <figure class="about-media">
+          <Image
+            src={familie}
+            alt="Elternteil und Kind gehen Hand in Hand durch den Regen"
+            class="about-image"
+            loading="lazy"
+          />
+          <figcaption>Bei jedem Wetter an ihrer Seite.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -122,6 +133,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   <section class="section section--alt section--projects">
     <div class="container">
       <article class="project-card">
+        <div class="project-body">
         <h2>Fast 10.000&nbsp;&euro; für die neue Außenspielanlage</h2>
         <p class="impact-highlight">
           Mehr Bewegung, mehr Begegnung, mehr sichere Spielmöglichkeiten im
@@ -134,6 +146,13 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
         <a href="/anmeldung" class="btn btn--secondary btn--small"
           >Mitglied werden</a
         >
+        </div>
+        <Image
+          src={uebermut}
+          alt="Drei Kinder schneiden übermütig Grimassen"
+          class="project-image"
+          loading="lazy"
+        />
       </article>
     </div>
   </section>
@@ -606,7 +625,33 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   .about-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  .about-media {
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+    justify-items: center;
+  }
+
+  .about-image {
+    max-inline-size: min(100%, 19rem);
+    block-size: auto;
+  }
+
+  .about-media figcaption {
+    font-size: 0.9375rem;
+    color: var(--text-weak);
+    text-align: center;
+  }
+
+  @media (min-width: 800px) {
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
   }
 
   .about-text p + p {
@@ -646,6 +691,22 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     border-radius: 0.9rem;
     background: oklch(100% 0 0 / 0.55);
     text-align: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  .project-image {
+    max-inline-size: min(100%, 14rem);
+    block-size: auto;
+    justify-self: center;
+  }
+
+  @media (min-width: 800px) {
+    .project-card {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
+    }
   }
 
   .impact-highlight {
