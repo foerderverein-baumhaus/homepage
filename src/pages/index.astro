@@ -256,6 +256,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
                 type="button"
                 class="iban-copy"
                 data-iban="DE29672901000061226508"
+                aria-live="polite"
                 hidden
               >
                 Kopieren
@@ -803,6 +804,13 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   .board-name a,
+  .board-contact a {
+    display: inline-block;
+    padding-block: 0.55rem;
+    margin-block: -0.35rem;
+  }
+
+  .board-name a,
   .board-contact a,
   .kiga-contact a,
   .donate-note a {
@@ -953,7 +961,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
 
   .donate-hint {
     margin: 0;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: var(--text-weak);
     max-inline-size: 38ch;
   }
@@ -970,7 +978,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     grid-template-columns: auto 1fr;
     gap: 0.375rem var(--space-s);
     text-align: start;
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
     width: 100%;
   }
 
@@ -1018,7 +1026,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   .donate-note {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: var(--text-weak);
     text-align: center;
     max-inline-size: 56ch;

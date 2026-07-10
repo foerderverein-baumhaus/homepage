@@ -739,6 +739,8 @@ const ogImageUrl = new URL("/og-image.png", site)
     font-style: italic;
     font-size: 1.1rem;
     color: white;
+    max-inline-size: 60ch;
+    margin-inline: auto;
   }
 
   .footer-links {
@@ -756,11 +758,13 @@ const ogImageUrl = new URL("/og-image.png", site)
     text-decoration: underline;
     text-underline-offset: 0.18em;
     display: inline-block;
-    padding-block: 0.65rem;
+    padding-block: 0.75rem;
   }
 
   .footer-copy {
     color: oklch(87% 0.012 148);
+    max-inline-size: 70ch;
+    margin-inline: auto;
   }
 
   @media (hover: hover) and (pointer: fine) {
