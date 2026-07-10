@@ -520,7 +520,7 @@ const ogImageUrl = new URL("/og-image.png", site)
 
   .legal-hero h1 {
     margin-block: 0.5rem 0.75rem;
-    font-size: clamp(1.9rem, 1.35rem + 1.8vw, 2.85rem);
+    font-size: clamp(1.8rem, 1.2rem + 1.6vw, 2.5rem);
     color: var(--brand);
     letter-spacing: -0.01em;
     line-height: 1.08;
@@ -623,7 +623,7 @@ const ogImageUrl = new URL("/og-image.png", site)
 
   .legal-toc a {
     display: block;
-    padding: 0.34rem 0.3rem 0.34rem 0.7rem;
+    padding: 0.72rem 0.3rem 0.72rem 0.7rem;
     border-left: 2px solid oklch(80% 0.015 145);
     color: oklch(35% 0.02 75);
     text-decoration: none;
@@ -635,9 +635,11 @@ const ogImageUrl = new URL("/og-image.png", site)
       border-color 0.2s ease;
   }
 
-  .legal-toc a:hover {
-    color: var(--brand);
-    border-left-color: oklch(52% 0.08 142);
+  @media (hover: hover) and (pointer: fine) {
+    .legal-toc a:hover {
+      color: var(--brand);
+      border-left-color: oklch(52% 0.08 142);
+    }
   }
 
   .legal-prose {
@@ -653,11 +655,17 @@ const ogImageUrl = new URL("/og-image.png", site)
     margin-block-end: 0.75rem;
     color: oklch(31% 0.052 130);
     font-size: clamp(1.23rem, 1.08rem + 0.5vw, 1.45rem);
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 1.5rem;
   }
 
   .legal-prose h2:first-of-type {
     margin-block-start: 0;
+  }
+
+  .legal-prose p,
+  .legal-prose ul,
+  .legal-prose ol {
+    max-inline-size: 70ch;
   }
 
   .legal-prose p {
