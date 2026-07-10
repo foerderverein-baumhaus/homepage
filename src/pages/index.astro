@@ -113,7 +113,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
               >
                 <path d="m20 6-9 9-5-5"></path>
               </svg>
-              <span>Wir zeigen offen, wohin jeder Euro fließt.</span>
+              <span>Wir sind die offizielle Spendenstelle des Kindergartens&nbsp;&ndash; er selbst darf keine Spenden annehmen.</span>
             </li>
           </ul>
         </div>
@@ -212,7 +212,9 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
       </div>
       <p class="donate-intro">
         Mit Ihrer Spende helfen Sie unmittelbar dort, wo Kinder heute lernen,
-        spielen und wachsen.
+        spielen und wachsen. Und sie landet garantiert richtig: Der
+        Kindergarten darf selbst keine Spenden annehmen&nbsp;&ndash; der
+        Förderverein ist seine offizielle Spendenstelle.
       </p>
       <div class="donate-grid">
         <div class="donate-card">
@@ -296,10 +298,30 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
           </a>
         </div>
       </div>
+      <div class="donate-more">
+        <h3>Sie möchten mehr bewegen?</h3>
+        <ul role="list">
+          <li>
+            <strong>Effektiv oft nur der halbe Betrag:</strong> Spenden an uns
+            sind steuerlich absetzbar&nbsp;&ndash; je nach Steuersatz holt die
+            Steuererklärung bis zur Hälfte zurück. Das gilt auch für
+            Unternehmen und Selbstständige.
+          </li>
+          <li>
+            <strong>Kein Tropfen im Ozean:</strong> Wir arbeiten komplett
+            ehrenamtlich, nichts versickert in Verwaltung. Eine größere Spende
+            ist bei uns kein Rundungsfehler, sondern das nächste Projekt.
+          </li>
+          <li>
+            <strong>Sichtbar in Großsachsen:</strong> Was Sie geben, sehen Sie
+            wieder&nbsp;&ndash; auf dem Spielplatz, bei den Festen, im Alltag
+            der Kinder.
+          </li>
+        </ul>
+      </div>
       <p class="donate-note">
-        Spenden an uns sind steuerlich absetzbar. Für eine Spendenquittung
-        schreiben Sie einfach Ihre Adresse in den Verwendungszweck oder eine
-        kurze Mail an
+        Ihre Spendenquittung kommt verlässlich: Schreiben Sie einfach Ihre
+        Adresse in den Verwendungszweck oder eine kurze Mail an
         <a href="mailto:info@foerderverein-baumhaus.de"
           >info@foerderverein-baumhaus.de</a
         >.
@@ -959,6 +981,40 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
 
   .donate-details dd {
     font-variant-numeric: tabular-nums;
+  }
+
+  .donate-more {
+    max-inline-size: 62ch;
+    margin-block-end: var(--space-l);
+  }
+
+  .section--donate .donate-more h3 {
+    font-family: var(--font-display);
+    font-size: 1.28rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.4rem;
+  }
+
+  .donate-more ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .donate-more li {
+    padding-block: 0.7rem;
+    border-block-start: 1px solid oklch(55% 0.05 147);
+    color: oklch(88% 0.015 148);
+  }
+
+  .donate-more li:first-child {
+    border-block-start: 0;
+    padding-block-start: 0.4rem;
+  }
+
+  .donate-more strong {
+    color: white;
   }
 
   .donate-note {
