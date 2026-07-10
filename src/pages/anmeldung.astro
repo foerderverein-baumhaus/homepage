@@ -66,12 +66,15 @@ import muenzen from "../assets/muenzen.svg"
           <a href="/datenschutz">Datenschutzerklärung</a>.
         </li>
       </ul>
-      <Image
-        src={muenzen}
-        alt="Eine Person stapelt sorgfältig Münzen"
-        class="join-facts-image"
-        loading="lazy"
-      />
+      <figure class="join-facts-media">
+        <Image
+          src={muenzen}
+          alt="Eine Person stapelt sorgfältig Münzen"
+          class="join-facts-image"
+          loading="lazy"
+        />
+        <figcaption>Kleiner Beitrag, große Wirkung.</figcaption>
+      </figure>
       </div>
     </section>
 
@@ -387,10 +390,45 @@ import muenzen from "../assets/muenzen.svg"
     align-items: center;
   }
 
+  .join-facts-media {
+    position: relative;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .join-facts-media::before {
+    content: "";
+    position: absolute;
+    inset-inline: 18%;
+    inset-block-end: 2.4rem;
+    block-size: 0.9rem;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      oklch(40% 0.05 148 / 0.2),
+      transparent 72%
+    );
+  }
+
+  .join-facts-media img {
+    position: relative;
+    z-index: 1;
+  }
+
+  .join-facts-media figcaption {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-weak);
+    text-align: center;
+  }
+
   .join-facts-image {
     max-inline-size: min(100%, 13rem);
     block-size: auto;
-    justify-self: center;
+    transform: rotate(-1.5deg);
   }
 
   @media (min-width: 760px) {

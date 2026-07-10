@@ -37,10 +37,9 @@ All commands are run from the root of the project, from a terminal:
 
 ## Assets
 
-- https://www.streamlinehq.com/icons/streamline-freehand/users/users-people/multiple-man-woman
-- https://www.streamlinehq.com/illustrations/havana/work/work/about-us-2
 - Illustrationen aus dem freien Djakarta-Set von Streamline (Farben an die
   Vereinspalette angepasst):
   - https://www.streamlinehq.com/illustrations/download/families-all-types-1--33057 (`familie.svg`)
   - https://www.streamlinehq.com/illustrations/download/being-silly-crazy--33057 (`uebermut.svg`)
   - https://www.streamlinehq.com/illustrations/download/currencies--33057 (`muenzen.svg`)
+  - https://www.streamlinehq.com/illustrations/download/selfie--33057 (`gemeinsam.svg`)
