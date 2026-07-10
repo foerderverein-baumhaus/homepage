@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import { Image } from "astro:assets"
+import icon from "../assets/icon.svg"
 ---
 
 <Layout
@@ -7,6 +9,7 @@ import Layout from "../layouts/Layout.astro"
   description="Diese Seite gibt es nicht — aber der Weg zurück ist kurz."
 >
   <div class="not-found">
+    <Image src={icon} alt="" class="not-found-icon" loading="eager" />
     <h1>Diese Seite gibt es nicht</h1>
     <p>
       Vielleicht ist der Link veraltet oder es hat sich ein Tippfehler
@@ -30,6 +33,13 @@ import Layout from "../layouts/Layout.astro"
   .not-found {
     text-align: start;
     padding-block: var(--space-l);
+  }
+
+  .not-found-icon {
+    inline-size: clamp(4.5rem, 10vw, 6.5rem);
+    block-size: auto;
+    margin-block-end: var(--space-s);
+    transform: rotate(-4deg);
   }
 
   .not-found-links {
