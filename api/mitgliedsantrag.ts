@@ -162,6 +162,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const info = await transporter.sendMail({
       from: `"Website Förderverein" <${smtpUser ?? "test@example.org"}>`,
       to: empfaenger,
+      // Gmail stellt eigene Gruppen-Posts dem Absender nicht zu — daher
+      // eine direkte Kopie an das Versandkonto selbst
+      cc: smtpUser,
       replyTo: `"${antrag.vorname} ${antrag.name}" <${antrag.email}>`,
       subject: `Neuer Mitgliedsantrag: ${antrag.vorname} ${antrag.name}`,
       text,
