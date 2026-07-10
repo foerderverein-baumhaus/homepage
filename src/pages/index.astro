@@ -326,53 +326,57 @@ import qrPaypal from "../assets/qr-paypal.svg"
           </li>
         </ul>
       </div>
-      <div class="donate-business">
-        <h3>Gutes tun&nbsp;&ndash; und genannt werden</h3>
-        <p>
-          Diese Unternehmen unterstützen die Kinder im
-          Baumhaus&nbsp;&ndash; herzlichen Dank!
-        </p>
-        <ul class="donate-business-names" role="list">
-          <li>
-            <Image
-              src={logoVolksbank}
-              alt="Volksbank Kurpfalz eG"
-              class="donate-business-logo"
-              loading="lazy"
-            />
-          </li>
-          <li>
-            <Image
-              src={logoJantz}
-              alt="Jantz Metallbau GmbH"
-              class="donate-business-logo donate-business-logo--hoch"
-              loading="lazy"
-            />
-          </li>
-        </ul>
-        <p>
-          Sie führen ein Unternehmen und möchten dazukommen? Bei
-          Unternehmensspenden sagen wir gern öffentlich Danke&nbsp;&ndash; mit
-          Ihrem Namen an dieser Stelle, wenn Sie das möchten. Schreiben Sie
-          uns einfach an
-          <a
-            href="mailto:info@foerderverein-baumhaus.de?subject=Unternehmensspende"
-            >info@foerderverein-baumhaus.de</a
-          >.
-        </p>
-        <p class="donate-business-note">
-          Gut zu wissen: Nennung und Logo ändern nichts an der Absetzbarkeit
-          Ihrer Spende. Sie möchten mehr&nbsp;&ndash; etwa eine
-          Verlinkung? Das machen wir als Sponsoring möglich, sprechen Sie
-          uns an.
-        </p>
-      </div>
       <p class="donate-note">
         Spendenquittung? Selbstverständlich. Schreiben Sie einfach Ihre
         Adresse in den Verwendungszweck oder eine kurze Mail an
         <a href="mailto:info@foerderverein-baumhaus.de"
           >info@foerderverein-baumhaus.de</a
         >.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt section--business">
+    <div class="container">
+      <div class="section-head">
+        <h2>Gutes tun&nbsp;&ndash; und genannt werden</h2>
+      </div>
+      <p class="business-intro">
+        Diese Unternehmen unterstützen die Kinder im Baumhaus&nbsp;&ndash;
+        herzlichen Dank!
+      </p>
+      <ul class="donate-business-names" role="list">
+        <li>
+          <Image
+            src={logoVolksbank}
+            alt="Volksbank Kurpfalz eG"
+            class="donate-business-logo"
+            loading="lazy"
+          />
+        </li>
+        <li>
+          <Image
+            src={logoJantz}
+            alt="Jantz Metallbau GmbH"
+            class="donate-business-logo donate-business-logo--hoch"
+            loading="lazy"
+          />
+        </li>
+      </ul>
+      <p class="business-invite">
+        Sie führen ein Unternehmen und möchten dazukommen? Bei
+        Unternehmensspenden sagen wir gern öffentlich Danke&nbsp;&ndash; mit
+        Ihrem Namen an dieser Stelle, wenn Sie das möchten. Schreiben Sie uns
+        einfach an
+        <a
+          href="mailto:info@foerderverein-baumhaus.de?subject=Unternehmensspende"
+          >info@foerderverein-baumhaus.de</a
+        >.
+      </p>
+      <p class="business-note">
+        Gut zu wissen: Nennung und Logo ändern nichts an der Absetzbarkeit
+        Ihrer Spende. Sie möchten mehr&nbsp;&ndash; etwa eine Verlinkung? Das
+        machen wir als Sponsoring möglich, sprechen Sie uns an.
       </p>
     </div>
   </section>
@@ -1089,73 +1093,6 @@ import qrPaypal from "../assets/qr-paypal.svg"
     color: white;
   }
 
-  .donate-business {
-    max-inline-size: 62ch;
-    margin-block-end: var(--space-l);
-  }
-
-  .section--donate .donate-business h3 {
-    font-family: var(--font-display);
-    font-size: 1.28rem;
-    font-weight: 700;
-    color: white;
-    margin: 0 0 0.4rem;
-  }
-
-  .donate-business-names {
-    list-style: none;
-    margin: 0 0 1rem;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: 0.8rem;
-  }
-
-  .donate-business-names li {
-    display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 0.6rem;
-    padding: 0.8rem 1.2rem;
-  }
-
-  .donate-business-logo {
-    display: block;
-    block-size: auto;
-    inline-size: auto;
-    max-block-size: 2.4rem;
-    max-inline-size: min(100%, 15rem);
-    object-fit: contain;
-  }
-
-  /* Kompakte (hohe) Logos dürfen mehr Höhe nutzen */
-  .donate-business-logo--hoch {
-    max-block-size: 3.4rem;
-  }
-
-  .donate-business p {
-    color: oklch(88% 0.015 148);
-    margin-block-end: 0.6rem;
-  }
-
-  .donate-business a {
-    color: oklch(90% 0.05 145);
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-  }
-
-  .donate-business-note {
-    font-size: 1rem;
-    color: oklch(80% 0.02 148);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .donate-business a:hover {
-      color: white;
-    }
-  }
-
   .donate-note {
     font-size: 1rem;
     color: var(--text-weak);
@@ -1174,6 +1111,69 @@ import qrPaypal from "../assets/qr-paypal.svg"
     color: var(--text-weak);
     max-inline-size: 52ch;
     margin-block-end: var(--space-m);
+  }
+
+  /* ===== Unternehmens-Spender ===== */
+  .business-intro,
+  .business-invite {
+    color: var(--text-weak);
+    max-inline-size: 62ch;
+    margin-block-end: var(--space-m);
+  }
+
+  .donate-business-names {
+    list-style: none;
+    margin: 0 0 var(--space-l);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .donate-business-names li {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--stroke-weak);
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .donate-business-names li {
+    max-inline-size: 100%;
+  }
+
+  .donate-business-logo {
+    display: block;
+    inline-size: 14rem;
+    block-size: auto;
+    max-inline-size: 100%;
+  }
+
+  .donate-business-logo--hoch {
+    inline-size: auto;
+    block-size: 3.4rem;
+    max-inline-size: 100%;
+  }
+
+  .business-invite a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .business-note {
+    font-size: 1rem;
+    color: var(--text-weak);
+    max-inline-size: 62ch;
+    margin-block-end: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .business-invite a:hover {
+      color: var(--brand-hover);
+    }
   }
 
   /* ===== Kindergarten ===== */
