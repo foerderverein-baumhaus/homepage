@@ -4,6 +4,8 @@ import { Image } from "astro:assets"
 import familie from "../assets/familie.svg"
 import gemeinsam from "../assets/gemeinsam.svg"
 import uebermut from "../assets/uebermut.svg"
+import logoVolksbank from "../assets/logo-volksbank-kurpfalz.png"
+import logoJantz from "../assets/logo-jantz-metallbau.png"
 import qrIban from "../assets/qr-iban.svg"
 import qrPaypal from "../assets/qr-paypal.svg"
 ---
@@ -331,8 +333,22 @@ import qrPaypal from "../assets/qr-paypal.svg"
           Baumhaus&nbsp;&ndash; herzlichen Dank!
         </p>
         <ul class="donate-business-names" role="list">
-          <li>Volksbank Kurpfalz eG</li>
-          <li>Jantz Metallbau GmbH</li>
+          <li>
+            <Image
+              src={logoVolksbank}
+              alt="Volksbank Kurpfalz eG"
+              class="donate-business-logo"
+              loading="lazy"
+            />
+          </li>
+          <li>
+            <Image
+              src={logoJantz}
+              alt="Jantz Metallbau GmbH"
+              class="donate-business-logo donate-business-logo--hoch"
+              loading="lazy"
+            />
+          </li>
         </ul>
         <p>
           Sie führen ein Unternehmen und möchten dazukommen? Bei
@@ -345,9 +361,10 @@ import qrPaypal from "../assets/qr-paypal.svg"
           >.
         </p>
         <p class="donate-business-note">
-          Gut zu wissen: Die Namensnennung ändert nichts an der Absetzbarkeit
-          Ihrer Spende. Sie möchten mehr Sichtbarkeit&nbsp;&ndash; Logo oder
-          Verlinkung? Dann sprechen Sie uns auf Sponsoring an.
+          Gut zu wissen: Nennung und Logo ändern nichts an der Absetzbarkeit
+          Ihrer Spende. Sie möchten mehr&nbsp;&ndash; etwa eine
+          Verlinkung? Das machen wir als Sponsoring möglich, sprechen Sie
+          uns an.
         </p>
       </div>
       <p class="donate-note">
@@ -1087,18 +1104,34 @@ import qrPaypal from "../assets/qr-paypal.svg"
 
   .donate-business-names {
     list-style: none;
-    margin: 0 0 0.9rem;
+    margin: 0 0 1rem;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 2.2rem;
+    align-items: stretch;
+    gap: 0.8rem;
   }
 
   .donate-business-names li {
-    font-family: var(--font-display);
-    font-size: 1.18rem;
-    font-weight: 600;
-    color: white;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .donate-business-logo {
+    display: block;
+    block-size: auto;
+    inline-size: auto;
+    max-block-size: 2.4rem;
+    max-inline-size: min(100%, 15rem);
+    object-fit: contain;
+  }
+
+  /* Kompakte (hohe) Logos dürfen mehr Höhe nutzen */
+  .donate-business-logo--hoch {
+    max-block-size: 3.4rem;
   }
 
   .donate-business p {
