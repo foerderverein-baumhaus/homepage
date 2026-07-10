@@ -106,11 +106,14 @@ const formUrl =
 <script>
   const slot = document.querySelector<HTMLElement>(".form-slot")
   slot?.querySelector("button")?.addEventListener("click", () => {
+    const note = document.createElement("p")
+    note.className = "form-loading"
+    note.textContent = "Das Formular wird geladen…"
     const iframe = document.createElement("iframe")
     iframe.src = slot.dataset.formUrl ?? ""
     iframe.title = "Aufnahmeantrag ausfüllen"
-    iframe.setAttribute("loading", "lazy")
-    slot.replaceChildren(iframe)
+    iframe.addEventListener("load", () => note.remove())
+    slot.replaceChildren(note, iframe)
     iframe.focus()
   })
 </script>
@@ -213,5 +216,10 @@ const formUrl =
   .join-alt {
     color: var(--text-weak);
     max-inline-size: 58ch;
+  }
+
+  .form-slot :global(.form-loading) {
+    margin: 0 0 0.6rem;
+    color: var(--text-weak);
   }
 </style>
