@@ -97,7 +97,11 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (!antrag.iban || !isValidIban(antrag.iban))
     fehler.iban =
       "Diese IBAN scheint nicht zu stimmen — bitte einmal prüfen (Tippfehler passieren schnell)."
-  if (body.einwilligung !== true)
+  const einwilligung =
+    body.einwilligung === true ||
+    body.einwilligung === "true" ||
+    body.einwilligung === "on"
+  if (!einwilligung)
     fehler.einwilligung =
       "Ohne Anerkennung der Satzung und SEPA-Einwilligung können wir den Antrag nicht annehmen."
 
@@ -164,7 +168,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     })
     if (useJsonTransport) {
       // Testmodus: gerenderte Mail zurückgeben statt zu senden
-      res.status(200).json({ ok: true, test: JSON.parse(info.message as string) })
+      const rendered = (info as unknown as { message: string }).message
+      res.status(200).json({ ok: true, test: JSON.parse(rendered) })
       return
     }
     res.status(200).json({ ok: true })

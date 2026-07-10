@@ -1,8 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro"
-
-const formUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfzAo7OSNJSknVaxq5WDcZyc_xelBrjFzpvxkZL4i0eHdp9QA/viewform"
 ---
 
 <Layout
@@ -71,22 +68,123 @@ const formUrl =
     <section class="join-form" aria-labelledby="antrag">
       <h2 id="antrag">Der Aufnahmeantrag</h2>
       <p>
-        Das Antragsformular kommt von Google. Erst wenn Sie es laden, werden
-        Daten an Google übertragen&nbsp;&ndash; Sie können es auch
-        <a href={formUrl} target="_blank" rel="noopener"
-          >in einem neuen Tab öffnen</a
-        >.
+        Füllen Sie einfach die Felder aus&nbsp;&ndash; Ihr Antrag geht direkt
+        per E-Mail an den Vorstand. Felder ohne Markierung sind Pflichtfelder.
       </p>
-      <div class="form-slot" data-form-url={`${formUrl}?embedded=true`}>
-        <button type="button" class="btn-load-form">
-          Formular hier anzeigen
-        </button>
+      <form id="antrag-form" method="post" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-vorname">Vorname</label>
+            <input
+              id="f-vorname"
+              name="vorname"
+              type="text"
+              autocomplete="given-name"
+              required
+            />
+            <p class="field-error" id="err-vorname" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-name">Nachname</label>
+            <input
+              id="f-name"
+              name="name"
+              type="text"
+              autocomplete="family-name"
+              required
+            />
+            <p class="field-error" id="err-name" hidden></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-strasse">Straße und Hausnummer</label>
+          <input
+            id="f-strasse"
+            name="strasse"
+            type="text"
+            autocomplete="street-address"
+            required
+          />
+          <p class="field-error" id="err-strasse" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-plzort">PLZ und Ort</label>
+          <input id="f-plzort" name="plzOrt" type="text" required />
+          <p class="field-error" id="err-plzOrt" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-email">E-Mail-Adresse</label>
+          <input
+            id="f-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+          <p class="field-error" id="err-email" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-telefon">Telefon <span class="optional">(freiwillig)</span></label>
+          <input id="f-telefon" name="telefon" type="tel" autocomplete="tel" />
+        </div>
+        <div class="field">
+          <label for="f-iban">IBAN</label>
+          <input
+            id="f-iban"
+            name="iban"
+            type="text"
+            inputmode="text"
+            autocapitalize="characters"
+            spellcheck="false"
+            placeholder="DE12 3456 7890 1234 5678 90"
+            required
+          />
+          <p class="field-hint">
+            Für den Einzug des Jahresbeitrags von 15&nbsp;&euro; per
+            SEPA-Lastschrift.
+          </p>
+          <p class="field-error" id="err-iban" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-kontoinhaber"
+            >Kontoinhaber/in <span class="optional">(nur falls abweichend)</span></label
+          >
+          <input id="f-kontoinhaber" name="kontoinhaber" type="text" />
+        </div>
+        <div class="field field--consent">
+          <label class="consent">
+            <input type="checkbox" name="einwilligung" required />
+            <span>
+              Ich erkenne die <a href="/satzung">Satzung</a> an und ermächtige
+              den Förderverein des Evangelischen Kindergartens &ldquo;Das
+              Baumhaus&rdquo; Großsachsen e.V., den Jahresbeitrag von
+              15&nbsp;&euro; bei Fälligkeit per SEPA-Lastschrift von meinem
+              Konto einzuziehen.
+            </span>
+          </label>
+          <p class="field-error" id="err-einwilligung" hidden></p>
+        </div>
+        <p class="visually-hidden" aria-hidden="true">
+          <label
+            >Bitte dieses Feld leer lassen:
+            <input name="website" type="text" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+        <button type="submit" class="btn-submit">Antrag absenden</button>
+        <p class="form-status" id="form-status" role="status" hidden></p>
+      </form>
+      <div class="form-success" id="form-success" hidden>
+        <h3>Danke für Ihren Antrag! 🌳</h3>
+        <p>
+          Ihr Aufnahmeantrag ist auf dem Weg zum Vorstand. Wir melden uns in
+          den nächsten Tagen persönlich per E-Mail bei Ihnen&nbsp;&ndash;
+          schön, dass Sie dabei sind!
+        </p>
       </div>
       <noscript>
         <p>
-          <a href={formUrl} target="_blank" rel="noopener"
-            >Zum Aufnahmeantrag (öffnet bei Google Forms)</a
-          >
+          Dieses Formular benötigt JavaScript. Ohne JavaScript nutzen Sie
+          bitte den E-Mail-Weg unten.
         </p>
       </noscript>
       <p class="join-alt">
@@ -101,17 +199,90 @@ const formUrl =
 </Layout>
 
 <script>
-  const slot = document.querySelector<HTMLElement>(".form-slot")
-  slot?.querySelector("button")?.addEventListener("click", () => {
-    const note = document.createElement("p")
-    note.className = "form-loading"
-    note.textContent = "Das Formular wird geladen…"
-    const iframe = document.createElement("iframe")
-    iframe.src = slot.dataset.formUrl ?? ""
-    iframe.title = "Aufnahmeantrag ausfüllen"
-    iframe.addEventListener("load", () => note.remove())
-    slot.replaceChildren(note, iframe)
-    iframe.focus()
+  const form = document.querySelector<HTMLFormElement>("#antrag-form")
+  const status = document.querySelector<HTMLElement>("#form-status")
+  const success = document.querySelector<HTMLElement>("#form-success")
+
+  function setFieldErrors(fehler: Record<string, string>) {
+    for (const el of form?.querySelectorAll<HTMLElement>(".field-error") ?? []) {
+      el.hidden = true
+      el.textContent = ""
+    }
+    for (const input of form?.querySelectorAll("input") ?? []) {
+      input.removeAttribute("aria-invalid")
+    }
+    let first: HTMLElement | null = null
+    for (const [feld, meldung] of Object.entries(fehler)) {
+      const err = document.querySelector<HTMLElement>(`#err-${feld}`)
+      const input = form?.querySelector<HTMLElement>(`[name="${feld}"]`)
+      if (err) {
+        err.textContent = meldung
+        err.hidden = false
+      }
+      if (input) {
+        input.setAttribute("aria-invalid", "true")
+        input.setAttribute("aria-describedby", `err-${feld}`)
+        first ??= input
+      }
+    }
+    first?.focus()
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    const button = form.querySelector<HTMLButtonElement>(".btn-submit")!
+    button.disabled = true
+    button.textContent = "Wird gesendet…"
+    if (status) status.hidden = true
+
+    const data = new FormData(form)
+    const payload = {
+      vorname: data.get("vorname"),
+      name: data.get("name"),
+      strasse: data.get("strasse"),
+      plzOrt: data.get("plzOrt"),
+      email: data.get("email"),
+      telefon: data.get("telefon"),
+      iban: data.get("iban"),
+      kontoinhaber: data.get("kontoinhaber"),
+      einwilligung: data.get("einwilligung") === "on",
+      website: data.get("website"),
+    }
+
+    try {
+      const response = await fetch("/api/mitgliedsantrag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (response.ok) {
+        form.hidden = true
+        if (success) {
+          success.hidden = false
+          success.focus?.()
+          success.scrollIntoView({ block: "center", behavior: "smooth" })
+        }
+        return
+      }
+      if (response.status === 400 && result.fehler) {
+        setFieldErrors(result.fehler)
+      } else if (status) {
+        status.textContent =
+          result.error ??
+          "Der Antrag konnte gerade nicht übermittelt werden. Bitte nutzen Sie den E-Mail-Weg unten."
+        status.hidden = false
+      }
+    } catch {
+      if (status) {
+        status.textContent =
+          "Keine Verbindung zum Server. Bitte prüfen Sie Ihr Internet oder nutzen Sie den E-Mail-Weg unten."
+        status.hidden = false
+      }
+    } finally {
+      button.disabled = false
+      button.textContent = "Antrag absenden"
+    }
   })
 </script>
 
@@ -180,26 +351,107 @@ const formUrl =
     margin: 0;
   }
 
-  .join-form iframe,
-  .form-slot :global(iframe) {
-    width: 100%;
-    max-width: 580px;
-    height: 1400px;
-    border: none;
-    background: white;
-    border-radius: 0.6rem;
+  #antrag-form {
+    max-inline-size: 34rem;
+    display: grid;
+    gap: 1.1rem;
   }
 
-  .btn-load-form {
+  .field-row {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  @media (min-width: 560px) {
+    .field-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .field {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .field label {
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  .field .optional {
+    font-weight: 400;
+    color: var(--text-weak);
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"] {
+    font: inherit;
+    padding: 0.7rem 0.85rem;
+    min-block-size: 48px;
+    border: 1px solid var(--stroke-strong);
+    border-radius: 0.45rem;
+    background: white;
+    color: var(--text-strong);
+  }
+
+  .field input:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 1px;
+  }
+
+  .field input[aria-invalid="true"] {
+    border-color: oklch(50% 0.18 27);
+  }
+
+  .field-hint {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--text-weak);
+  }
+
+  .field-error {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: oklch(45% 0.17 27);
+  }
+
+  .field--consent .consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    font-weight: 400;
+  }
+
+  .consent input[type="checkbox"] {
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    margin-block-start: 0.15rem;
+    accent-color: var(--brand);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .btn-submit {
+    justify-self: start;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.75rem;
-    min-height: 48px;
+    padding: 0.8rem 2rem;
+    min-block-size: 48px;
     border-radius: 0.6rem;
     border: 1px solid transparent;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-family: inherit;
     color: white;
     cursor: pointer;
@@ -210,13 +462,42 @@ const formUrl =
     );
   }
 
+  .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+
+  .form-status {
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border-radius: 0.45rem;
+    background: oklch(96% 0.03 27);
+    border: 1px solid oklch(70% 0.1 27);
+    color: oklch(38% 0.14 27);
+    font-weight: 500;
+    max-inline-size: 34rem;
+  }
+
+  .form-success {
+    max-inline-size: 34rem;
+    padding: 1.4rem 1.5rem;
+    border-radius: 0.9rem;
+    background: oklch(94% 0.04 148);
+    border: 1px solid oklch(75% 0.06 147);
+  }
+
+  .form-success h3 {
+    font-family: var(--font-display);
+    margin: 0 0 0.5rem;
+    color: var(--brand);
+  }
+
+  .form-success p {
+    margin: 0;
+  }
+
   .join-alt {
     color: var(--text-weak);
     max-inline-size: 58ch;
-  }
-
-  .form-slot :global(.form-loading) {
-    margin: 0 0 0.6rem;
-    color: var(--text-weak);
   }
 </style>
