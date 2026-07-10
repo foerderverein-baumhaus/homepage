@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import icon from "../assets/icon.svg"
+
+const eintraege = (await getCollection("aktuelles")).sort(
+  (a, b) => b.data.datum.valueOf() - a.data.datum.valueOf()
+)
+
+const datumsFormat = new Intl.DateTimeFormat("de-DE", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+})
+---
+
+<Layout
+  title="Aktuelles"
+  description="Neuigkeiten aus dem Förderverein: realisierte Projekte, Feste und was Ihre Beiträge und Spenden bewirken."
+>
+  <div class="news-page">
+    <section class="legal-hero">
+      <img src={icon.src} alt="" class="legal-tree" width="24" height="24" />
+      <h1>Aktuelles</h1>
+      <p class="legal-lead">
+        Was wir mit Ihren Beiträgen und Spenden anstellen, was unsere Feste
+        einbringen und woran wir gerade arbeiten&nbsp;&ndash; hier berichten
+        wir offen darüber.
+      </p>
+    </section>
+
+    <div class="news-liste">
+      {
+        eintraege.map(async (eintrag) => {
+          const { Content } = await render(eintrag)
+          return (
+            <article class="news-eintrag">
+              <p class="news-datum">
+                {datumsFormat.format(eintrag.data.datum)}
+              </p>
+              <h2>{eintrag.data.titel}</h2>
+              <Content />
+            </article>
+          )
+        })
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .news-page {
+    display: grid;
+    gap: clamp(1.6rem, 3.3vw, 2.7rem);
+  }
+
+  .news-liste {
+    display: grid;
+    gap: clamp(2.2rem, 5vw, 3.5rem);
+    max-inline-size: 70ch;
+  }
+
+  .news-eintrag :global(p) {
+    max-inline-size: 70ch;
+  }
+
+  .news-datum {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-weak);
+    margin: 0 0 0.2rem;
+  }
+
+  .news-eintrag h2 {
+    margin: 0 0 0.6rem;
+    color: oklch(31% 0.052 130);
+    font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.7rem);
+  }
+</style>

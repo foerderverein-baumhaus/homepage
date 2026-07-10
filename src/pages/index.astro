@@ -146,6 +146,9 @@ import qrPaypal from "../assets/qr-paypal.svg"
           bringen&nbsp;&ndash; und die ohne Förderverein oft nicht zu stemmen
           wären.
         </p>
+        <p class="project-more">
+          <a href="/aktuelles">Mehr Neuigkeiten aus dem Verein</a>
+        </p>
         <a href="/anmeldung" class="btn btn--secondary btn--small"
           >Mitglied werden</a
         >
@@ -836,6 +839,23 @@ import qrPaypal from "../assets/qr-paypal.svg"
 
   .project-card .btn {
     margin-block-start: 0.45rem;
+  }
+
+  .project-more {
+    margin-block-end: 0.3rem;
+  }
+
+  .project-more a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .project-more a:hover {
+      color: var(--brand-hover);
+    }
   }
 
   /* ===== Board ===== */
