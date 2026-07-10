@@ -327,16 +327,23 @@ import qrPaypal from "../assets/qr-paypal.svg"
       <div class="donate-business">
         <h3>Gutes tun&nbsp;&ndash; und genannt werden</h3>
         <p>
-          Sie führen ein Unternehmen? Bei Unternehmensspenden sagen wir gern
-          öffentlich Danke&nbsp;&ndash; mit Ihrem Namen an dieser Stelle, wenn
-          Sie das möchten. Die ersten Plätze sind noch frei. Schreiben Sie uns
-          einfach an
+          Diese Unternehmen unterstützen die Kinder im
+          Baumhaus&nbsp;&ndash; herzlichen Dank!
+        </p>
+        <ul class="donate-business-names" role="list">
+          <li>Volksbank Kurpfalz eG</li>
+          <li>Jantz Metallbau GmbH</li>
+        </ul>
+        <p>
+          Sie führen ein Unternehmen und möchten dazukommen? Bei
+          Unternehmensspenden sagen wir gern öffentlich Danke&nbsp;&ndash; mit
+          Ihrem Namen an dieser Stelle, wenn Sie das möchten. Schreiben Sie
+          uns einfach an
           <a
             href="mailto:info@foerderverein-baumhaus.de?subject=Unternehmensspende"
             >info@foerderverein-baumhaus.de</a
           >.
         </p>
-        {/* Künftige Unternehmens-Spender hier als Liste ergänzen */}
         <p class="donate-business-note">
           Gut zu wissen: Die Namensnennung ändert nichts an der Absetzbarkeit
           Ihrer Spende. Sie möchten mehr Sichtbarkeit&nbsp;&ndash; Logo oder
@@ -1076,6 +1083,22 @@ import qrPaypal from "../assets/qr-paypal.svg"
     font-weight: 700;
     color: white;
     margin: 0 0 0.4rem;
+  }
+
+  .donate-business-names {
+    list-style: none;
+    margin: 0 0 0.9rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.2rem;
+  }
+
+  .donate-business-names li {
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: white;
   }
 
   .donate-business p {
