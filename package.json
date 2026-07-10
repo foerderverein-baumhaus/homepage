@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "node scripts/generate-qr.mjs && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "svgopt": "svgo -r src"
+    "svgopt": "svgo -r src",
+    "qr": "node scripts/generate-qr.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -21,7 +22,9 @@
   "devDependencies": {
     "@types/node": "^26.1.1",
     "@types/nodemailer": "^8.0.1",
+    "jsqr": "^1.4.0",
     "prettier": "^3.6.2",
+    "qrcode": "^1.5.4",
     "sharp": "^0.34.3",
     "svgo": "^4.0.0"
   }

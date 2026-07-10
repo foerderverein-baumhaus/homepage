@@ -4,8 +4,8 @@ import { Image } from "astro:assets"
 import familie from "../assets/familie.svg"
 import gemeinsam from "../assets/gemeinsam.svg"
 import uebermut from "../assets/uebermut.svg"
-import ibanSpende from "../assets/iban-spende.png"
-import paypalSpende from "../assets/paypal-spende.jpeg"
+import qrIban from "../assets/qr-iban.svg"
+import qrPaypal from "../assets/qr-paypal.svg"
 ---
 
 <Layout title="Startseite" wide>
@@ -244,7 +244,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             Bankverbindung darunter.
           </p>
           <Image
-            src={ibanSpende}
+            src={qrIban}
             alt="QR-Code für Banküberweisung an den Förderverein"
             class="donate-qr"
             loading="lazy"
@@ -287,7 +287,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
             Sie direkt auf den Button.
           </p>
           <Image
-            src={paypalSpende}
+            src={qrPaypal}
             alt="QR-Code für PayPal-Spende an den Förderverein"
             class="donate-qr"
             loading="lazy"
