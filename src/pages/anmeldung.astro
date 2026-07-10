@@ -69,56 +69,88 @@ import Layout from "../layouts/Layout.astro"
       <h2 id="antrag">Der Aufnahmeantrag</h2>
       <p>
         Füllen Sie einfach die Felder aus&nbsp;&ndash; Ihr Antrag geht direkt
-        per E-Mail an den Vorstand. Felder ohne Markierung sind Pflichtfelder.
+        per E-Mail an den Vorstand. Mit
+        <span aria-hidden="true">*</span><span class="visually-hidden">Stern</span>
+        markierte Felder sind Pflichtfelder.
       </p>
-      <form id="antrag-form" method="post" novalidate>
+      <noscript>
+        <style>
+          #antrag-form {
+            display: none;
+          }
+        </style>
+        <p>
+          <strong>Dieses Formular benötigt JavaScript.</strong> Kein Problem:
+          Schreiben Sie uns einfach an
+          <a href="mailto:info@foerderverein-baumhaus.de"
+            >info@foerderverein-baumhaus.de</a
+          >&nbsp;&ndash; wir schicken Ihnen den Antrag per E-Mail oder auf
+          Papier.
+        </p>
+      </noscript>
+      <form id="antrag-form" method="post">
         <div class="field-row">
           <div class="field">
-            <label for="f-vorname">Vorname</label>
+            <label for="f-vorname">Vorname <span class="req" aria-hidden="true">*</span></label>
             <input
               id="f-vorname"
               name="vorname"
               type="text"
               autocomplete="given-name"
+              maxlength="200"
+              aria-describedby="err-vorname"
               required
             />
             <p class="field-error" id="err-vorname" hidden></p>
           </div>
           <div class="field">
-            <label for="f-name">Nachname</label>
+            <label for="f-name">Nachname <span class="req" aria-hidden="true">*</span></label>
             <input
               id="f-name"
               name="name"
               type="text"
               autocomplete="family-name"
+              maxlength="200"
+              aria-describedby="err-name"
               required
             />
             <p class="field-error" id="err-name" hidden></p>
           </div>
         </div>
         <div class="field">
-          <label for="f-strasse">Straße und Hausnummer</label>
+          <label for="f-strasse">Straße und Hausnummer <span class="req" aria-hidden="true">*</span></label>
           <input
             id="f-strasse"
             name="strasse"
             type="text"
             autocomplete="street-address"
+            maxlength="200"
+            aria-describedby="err-strasse"
             required
           />
           <p class="field-error" id="err-strasse" hidden></p>
         </div>
         <div class="field">
-          <label for="f-plzort">PLZ und Ort</label>
-          <input id="f-plzort" name="plzOrt" type="text" required />
+          <label for="f-plzort">PLZ und Ort <span class="req" aria-hidden="true">*</span></label>
+          <input
+            id="f-plzort"
+            name="plzOrt"
+            type="text"
+            maxlength="200"
+            aria-describedby="err-plzOrt"
+            required
+          />
           <p class="field-error" id="err-plzOrt" hidden></p>
         </div>
         <div class="field">
-          <label for="f-email">E-Mail-Adresse</label>
+          <label for="f-email">E-Mail-Adresse <span class="req" aria-hidden="true">*</span></label>
           <input
             id="f-email"
             name="email"
             type="email"
             autocomplete="email"
+            maxlength="200"
+            aria-describedby="err-email"
             required
           />
           <p class="field-error" id="err-email" hidden></p>
@@ -128,7 +160,7 @@ import Layout from "../layouts/Layout.astro"
           <input id="f-telefon" name="telefon" type="tel" autocomplete="tel" />
         </div>
         <div class="field">
-          <label for="f-iban">IBAN</label>
+          <label for="f-iban">IBAN <span class="req" aria-hidden="true">*</span></label>
           <input
             id="f-iban"
             name="iban"
@@ -137,9 +169,11 @@ import Layout from "../layouts/Layout.astro"
             autocapitalize="characters"
             spellcheck="false"
             placeholder="DE12 3456 7890 1234 5678 90"
+            maxlength="42"
+            aria-describedby="hint-iban err-iban"
             required
           />
-          <p class="field-hint">
+          <p class="field-hint" id="hint-iban">
             Für den Einzug des Jahresbeitrags von 15&nbsp;&euro; per
             SEPA-Lastschrift.
           </p>
@@ -171,9 +205,9 @@ import Layout from "../layouts/Layout.astro"
           </label>
         </p>
         <button type="submit" class="btn-submit">Antrag absenden</button>
-        <p class="form-status" id="form-status" role="status" hidden></p>
+        <p class="form-status" id="form-status" role="alert" hidden></p>
       </form>
-      <div class="form-success" id="form-success" hidden>
+      <div class="form-success" id="form-success" role="status" tabindex="-1" hidden>
         <h3>Danke für Ihren Antrag! 🌳</h3>
         <p>
           Ihr Aufnahmeantrag ist auf dem Weg zum Vorstand. Wir melden uns in
@@ -181,12 +215,6 @@ import Layout from "../layouts/Layout.astro"
           schön, dass Sie dabei sind!
         </p>
       </div>
-      <noscript>
-        <p>
-          Dieses Formular benötigt JavaScript. Ohne JavaScript nutzen Sie
-          bitte den E-Mail-Weg unten.
-        </p>
-      </noscript>
       <p class="join-alt">
         Lieber klassisch? Schreiben Sie uns an
         <a href="mailto:info@foerderverein-baumhaus.de"
@@ -221,7 +249,6 @@ import Layout from "../layouts/Layout.astro"
       }
       if (input) {
         input.setAttribute("aria-invalid", "true")
-        input.setAttribute("aria-describedby", `err-${feld}`)
         first ??= input
       }
     }
@@ -260,8 +287,14 @@ import Layout from "../layouts/Layout.astro"
         form.hidden = true
         if (success) {
           success.hidden = false
-          success.focus?.()
-          success.scrollIntoView({ block: "center", behavior: "smooth" })
+          const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+          success.scrollIntoView({
+            block: "center",
+            behavior: reduceMotion ? "auto" : "smooth",
+          })
+          success.focus()
         }
         return
       }
@@ -381,6 +414,15 @@ import Layout from "../layouts/Layout.astro"
   .field .optional {
     font-weight: 400;
     color: var(--text-weak);
+  }
+
+  .req {
+    color: var(--brand);
+  }
+
+  .form-success:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
   }
 
   .field input[type="text"],
