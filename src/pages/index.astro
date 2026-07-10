@@ -908,14 +908,21 @@ import qrPaypal from "../assets/qr-paypal.svg"
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1;
-    min-block-size: 44px;
-    padding: 0.45rem 1rem;
+    padding: 0.32rem 0.9rem;
     border-radius: 999px;
     border: 1px solid oklch(100% 0 0 / 0.45);
     background: oklch(100% 0 0 / 0.12);
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
+    /* Zeilenhoch im Layout, aber volle 44px-Tap-Fläche */
+    position: relative;
+  }
+
+  .iban-copy::before {
+    content: "";
+    position: absolute;
+    inset: -9px -4px;
   }
 
   @media (hover: hover) and (pointer: fine) {
