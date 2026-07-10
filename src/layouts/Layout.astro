@@ -23,7 +23,7 @@ const pageDescription =
   description ||
   frontmatter?.description ||
   "Förderverein des Evangelischen Kindergartens Das Baumhaus Großsachsen e.V. – Unterstützung mit Ideen und finanziellen Zuwendungen."
-const siteTitle = `${pageTitle} — Förderverein "Das Baumhaus"`
+const siteTitle = `${pageTitle} — Förderverein „Das Baumhaus“`
 const isWide = wide || frontmatter?.wide === true
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/"
@@ -45,7 +45,7 @@ const ogImageUrl = new URL("/og-image.png", site)
 
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={siteTitle} />
-    <meta property="og:site_name" content='Förderverein "Das Baumhaus"' />
+    <meta property="og:site_name" content="Förderverein „Das Baumhaus“" />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />
@@ -70,7 +70,7 @@ const ogImageUrl = new URL("/og-image.png", site)
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: 'Förderverein des Evangelischen Kindergartens "Das Baumhaus" Großsachsen e.V.',
+        name: 'Förderverein des Evangelischen Kindergartens „Das Baumhaus“ Großsachsen e.V.',
         url: "https://www.foerderverein-baumhaus.de",
         email: "info@foerderverein-baumhaus.de",
         description:
@@ -167,7 +167,7 @@ const ogImageUrl = new URL("/og-image.png", site)
       </ul>
       <p class="footer-copy">
         &copy; 2024&ndash;{new Date().getFullYear()}, Förderverein des
-        Evangelischen Kindergartens &ldquo;Das Baumhaus&rdquo; Großsachsen e.V.
+        Evangelischen Kindergartens &bdquo;Das Baumhaus&ldquo; Großsachsen e.V.
       </p>
     </footer>
   </body>
