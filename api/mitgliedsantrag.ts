@@ -43,9 +43,19 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)
 }
 
+/** IBAN auf reine Zeichen reduzieren (toleriert Punkte, Bindestriche etc.). */
+function normalizeIban(raw: string): string {
+  return raw.replace(/[^A-Za-z0-9]/g, "").toUpperCase()
+}
+
+/** In Vierergruppen formatieren für die Mail. */
+function formatIban(raw: string): string {
+  return normalizeIban(raw).match(/.{1,4}/g)?.join(" ") ?? raw
+}
+
 /** Generische IBAN-Prüfung: Format + Mod-97-Prüfziffer (ISO 13616). */
 function isValidIban(raw: string): boolean {
-  const iban = raw.replace(/\s+/g, "").toUpperCase()
+  const iban = normalizeIban(raw)
   if (!/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/.test(iban)) return false
   const rearranged = iban.slice(4) + iban.slice(0, 4)
   const digits = rearranged.replace(/[A-Z]/g, (c) =>
@@ -146,7 +156,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     `E-Mail:         ${antrag.email}`,
     `Telefon:        ${antrag.telefon || "–"}`,
     "",
-    `IBAN:           ${antrag.iban}`,
+    `IBAN:           ${formatIban(antrag.iban)}`,
     `Kontoinhaber:   ${antrag.kontoinhaber || "(wie Antragsteller/in)"}`,
     "",
     "Die antragstellende Person hat die Satzung anerkannt und den",
@@ -169,10 +179,48 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       subject: `Neuer Mitgliedsantrag: ${antrag.vorname} ${antrag.name}`,
       text,
     })
+    // Bestätigung an die antragstellende Person — Scheitern hiervon
+    // darf den bereits zugestellten Antrag nicht als Fehler melden
+    let confirmation: unknown = null
+    try {
+      const confirmationInfo = await transporter.sendMail({
+        from: `"Förderverein Das Baumhaus" <${smtpUser ?? "test@example.org"}>`,
+        to: `"${antrag.vorname} ${antrag.name}" <${antrag.email}>`,
+        replyTo: empfaenger,
+        subject: "Ihr Mitgliedsantrag beim Förderverein „Das Baumhaus“",
+        text: [
+          `Hallo ${antrag.vorname} ${antrag.name},`,
+          "",
+          "vielen Dank für Ihren Aufnahmeantrag — er ist beim Vorstand",
+          "eingegangen. Wir melden uns in den nächsten Tagen persönlich",
+          "bei Ihnen. Schön, dass Sie dabei sind!",
+          "",
+          "Zur Erinnerung: Der Jahresbeitrag beträgt 15 € und wird einmal",
+          "im Jahr per SEPA-Lastschrift eingezogen.",
+          "",
+          "Sie haben Fragen? Antworten Sie einfach auf diese E-Mail.",
+          "",
+          "Herzliche Grüße",
+          "Der Vorstand des Fördervereins",
+          'des Evangelischen Kindergartens „Das Baumhaus“ Großsachsen e.V.',
+          "https://www.foerderverein-baumhaus.de",
+        ].join("\n"),
+      })
+      if (useJsonTransport) {
+        confirmation = JSON.parse(
+          (confirmationInfo as unknown as { message: string }).message
+        )
+      }
+    } catch (error) {
+      console.error("Mitgliedsantrag: Bestätigungsmail fehlgeschlagen", error)
+    }
+
     if (useJsonTransport) {
-      // Testmodus: gerenderte Mail zurückgeben statt zu senden
+      // Testmodus: gerenderte Mails zurückgeben statt zu senden
       const rendered = (info as unknown as { message: string }).message
-      res.status(200).json({ ok: true, test: JSON.parse(rendered) })
+      res
+        .status(200)
+        .json({ ok: true, test: JSON.parse(rendered), confirmation })
       return
     }
     res.status(200).json({ ok: true })
