@@ -147,12 +147,15 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
           >Mitglied werden</a
         >
         </div>
-        <Image
-          src={uebermut}
-          alt="Drei Kinder schneiden übermütig Grimassen"
-          class="project-image"
-          loading="lazy"
-        />
+        <figure class="project-media illu">
+          <Image
+            src={uebermut}
+            alt="Drei Kinder schneiden übermütig Grimassen"
+            class="project-image"
+            loading="lazy"
+          />
+          <figcaption>Mehr Platz zum Toben.</figcaption>
+        </figure>
       </article>
     </div>
   </section>
@@ -532,10 +535,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     animation: reveal-up 0.75s ease-out both;
   }
 
-  .hero-panel {
-    text-align: start;
-  }
-
   .hero h1 {
     font-size: clamp(2.1rem, 1.1rem + 3.2vw, 3.4rem);
     color: var(--brand);
@@ -597,7 +596,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   .hero-media.illu::before {
-    bottom: 2.6rem;
+    inset-block-end: 2.6rem;
   }
 
   .hero-image {
@@ -708,7 +707,7 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   .about-media.illu::before {
-    bottom: 2.4rem;
+    inset-block-end: 2.4rem;
   }
 
   .about-image {
@@ -751,10 +750,6 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
   }
 
   /* ===== Projects ===== */
-  .section--projects .container {
-    display: block;
-  }
-
   .project-card {
     width: min(100%, 52rem);
     padding: clamp(1.5rem, 3.2vw, 2.4rem);
@@ -767,10 +762,17 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
     align-items: center;
   }
 
+  .project-media {
+    justify-self: center;
+  }
+
+  .project-media.illu::before {
+    inset-block-end: 2.4rem;
+  }
+
   .project-image {
     max-inline-size: min(100%, 14rem);
     block-size: auto;
-    justify-self: center;
     transform: rotate(2deg);
   }
 
@@ -779,9 +781,9 @@ import paypalSpende from "../assets/paypal-spende.jpeg"
       grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
     }
 
-    .project-image {
+    .project-media {
       align-self: start;
-      margin-block-start: calc(-1 * clamp(3.2rem, 7vw, 4.8rem));
+      margin-block-start: calc(-1 * clamp(2.6rem, 6vw, 4.2rem));
     }
   }
 
